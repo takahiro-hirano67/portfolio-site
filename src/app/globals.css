@@ -1,26 +1,56 @@
+/* src/app/globals.css */
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+    /* --- 背景・サーフェス --- */
+    --color-bg-base: #f7f6f3; /* 全体の基底背景 (ウォームグレー) */
+    --color-bg-subtle: #efefed; /* 控えめな背景 (サイドバーや薄いバッジ) */
+    --color-tag: #e8e7e4; /* タグ・バッジ・ホバー背景 */
+    --color-surface: #ffffff; /* サーフェス (カードや読む領域は純白) */
+    --color-surface-muted: #f5f4f1; /* 控えめなサーフェス (コードブロックのヘッダーなど) */
+
+    /* --- 区切り線 --- */
+    --color-border-base: #e0dfdb; /* 標準的な区切り線 (カード・パネル境界など) */
+    --color-border-light: #eceae6; /* 控えめな区切り線 (リスト内の軽い区切り線など) */
+    --color-border-strong: #d4d2cd; /* 強めの区切り線 (テーブルのヘッダー下など) */
+
+    /* --- テキスト --- */
+    --color-text-base: #1a1a18; /* 主要テキスト (ソフトブラック) */
+    --color-text-mid: #6b6b67; /* 補助テキスト (説明文・ラベルなど) */
+    --color-text-soft: #9b9b97; /* 非アクティブ (プレースホルダー・アイコンなど) */
+
+    /* --- アクセント（ブランドカラー） --- */
+    --color-accent: #3d52a0; /* インタラクション・強調 (インディゴ) */
+    --color-accent-hover: #2f407d; /* アクセントのホバー時 (少し暗く) */
+    --color-accent-bg: #eef0f8; /* アクセントカラーの背景版 (アクティブ状態など) */
+
+    /* --- フォント --- */
+    --font-sans: var(--font-noto-sans-jp); /* ゴシック体フォント (UI要素・操作する領域) */
+    --font-serif: var(--font-noto-serif-jp); /* 明朝体フォント (本文・見出し・読む領域) */
+
+    /* --- フォントサイズ --- */
+    --text-display: 1.375rem; /* / 22px: ページ見出し・レポートタイトル / Markdown H1*/
+    --text-title: 1.25rem; /* / 20px: カードタイトル */
+    --text-heading: 1.125rem; /*  18px: セクション見出し1 / Markdown H2*/
+    --text-subheading: 1rem; /* 16px: セクション見出し2 / Markdown H3 / font-weightで区別 /  */
+    --text-body: 1rem; /* 16px: 本文基準 */
+    --text-body-sm: 0.9375rem; /* 15px: 少し控えめな本文 / 引用・アラートなど */
+    --text-caption: 0.875rem; /* 14px: ラベル・メタ情報・タグ */
+    --text-label: 0.8125rem; /* 13px: テーブルヘッダー・補足ラベル */
+    --text-tiny: 0.75rem; /* 12px: 日時・バッジ・凡例  */
+    --text-micro: 0.7rem; /* 11px: 引用タグなどの極小要素 */
+
+    /* --- フォントウェイト --- */
+    --font-weight-heading: 600; /* 見出し */
+    --font-weight-medium: 500; /* UI要素・テーブルヘッダーなど */
+    --font-weight-body: 400; /* 本文 */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* @theme 外に通常のCSSとして記述 */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    font-size: var(--text-body);
+    background-color: var(--color-bg-base);
+    color: var(--color-text-base);
 }
