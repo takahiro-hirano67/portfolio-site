@@ -1,6 +1,6 @@
-/* src/app/globals.css */
-
 @import "tailwindcss";
+
+/* Verideaで採用しているデザイントークンをベースとしている */
 
 @theme {
     /* --- 背景・サーフェス --- */

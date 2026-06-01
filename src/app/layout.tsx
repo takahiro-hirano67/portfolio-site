@@ -1,5 +1,3 @@
-// src/app/layout.tsx
-
 import type { Metadata } from "next";
 import { notoSansJp, notoSerifJp } from "@/config/font-config";
 import "./globals.css";
