@@ -1,73 +1,89 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
+import { LuExternalLink } from "react-icons/lu";
+import type { HeaderData, ProfileData, ResearchData, SkillGroup, WorkData } from "@/types";
+
+// --- 定数 ---
+
+const GitHubLink = "https://github.com/takahiro-hirano67";
+const QiitaLink = "https://qiita.com/takahiro-hirano67";
 
 // --- データ ---
 
-const HEADER_DATA = {
+const HEADER_DATA: HeaderData = {
     title: "Takahiro Hirano",
-    links: ["About", "Works", "Research", "Skills"],
-    github: "https://github.com/takahiro-hirano67",
+    navLinks: ["About", "Works", "Research", "Skills"],
+    sns: [{ id: "1", label: "GitHub", url: GitHubLink }],
 };
 
-const PROFILE = {
+const PROFILE: ProfileData = {
     name: "平野 貴大",
     affiliation: "愛知工業大学 経営情報システム専攻",
     description:
         "生成AI（LLM）を用いた知財探索システムの開発や、ハルシネーション検証の研究に取り組んでいます。大学発スタートアップでの活動を通し、「何を根拠にそう言えるのか」という問いを大切にしながら、事実に基づいた、ユーザーが安心して使えるシステムの設計から実装までに向き合っています。",
     badges: [
-        {
-            id: "1",
-            label: "株式会社フリーヒルズラボ 執行役員",
-        },
-        {
-            id: "2",
-            label: "自由ヶ丘執行委員会 財政",
-        },
-        {
-            id: "3",
-            label: "2028年卒業見込み",
-        },
+        { id: "1", label: "株式会社フリーヒルズラボ 執行役員" },
+        { id: "2", label: "自由ヶ丘執行委員会 財政" },
+        { id: "3", label: "2028年卒業見込み" },
+    ],
+    externalLinks: [
+        { id: "1", label: "GitHub", url: GitHubLink },
+        { id: "2", label: "Qiita", url: QiitaLink },
     ],
 };
 
-const WORKS = [
+const WORKS: WorkData[] = [
     {
-        id: "veridea",
+        id: "1",
         name: "Veridea",
         tagline: "根拠を辿れる知財探索の場",
         description:
-            "特許文書を起点にアイデア生成・類似特許検索・協業先マッチングを行うWebアプリです。根拠を辿れる状態でLLMの生成物を観察できる空間を提供します。数百万件の特許公報・特許分類・法人情報を管理する自前のDBとAPIを整備し、バックエンドからフロントエンドまで一貫して実装しています。",
-        stack: ["Next.js", "TypeScript", "FastAPI", "PostgreSQL", "Drizzle ORM"],
+            "特許文書を起点にアイデア生成・類似特許検索・協業先マッチングを行うWebアプリです。根拠を辿れる状態でLLMの生成物を観察できる空間を提供します。数百万件の特許公報・特許分類・法人情報を管理する自前のDBとAPIを整備し、バックエンドからフロントエンドまで一貫して実装しています。サービス化に向けて日々開発を進めています。",
+        stack: [
+            "Next.js",
+            "TypeScript",
+            "FastAPI",
+            "Docker",
+            "PostgreSQL",
+            "Psycopg",
+            "Drizzle ORM",
+            "Sentence Transformers",
+            "OpenAI互換API",
+        ],
         badge: "開発中",
-        github: null,
+        links: [],
         imagesLabel: "アプリケーション画面",
         imagesSubLabel: "画面",
         images: ["/works/veridea/screenshot-1.jpg"],
     },
     {
-        id: "academic-reader",
+        id: "2",
         name: "academic-reader",
         tagline: "学術論文PDFの構造化ビューワー",
         description:
             "Doclingを用いて複雑な段組み・数式・図版を含む論文PDFを正確に構造化し、ブラウザ上でMarkdownとして表示するローカル専用ツールです。ブラウザの翻訳機能をそのまま使える点が特徴です。",
-        stack: ["Next.js", "FastAPI", "Docling", "Docker"],
+        stack: ["Next.js", "TypeScript", "FastAPI", "Docker", "Docling"],
         badge: null,
-        github: "https://github.com/takahiro-hirano67/academic-reader",
+        links: [{ id: "1", label: "GitHub", url: "https://github.com/takahiro-hirano67/academic-reader" }],
         imagesLabel: "アプリケーション画面",
         imagesSubLabel: "画面",
         images: ["/works/academic-reader/screenshot-1.png"],
     },
     {
-        id: "bingo",
+        id: "3",
         name: "ziyuu-sikkou-bingo-num",
         tagline: "イベント景品番号管理アプリ",
         description:
             "自由ヶ丘執行委員会（学生組織）で利用するビンゴ大会の景品割り当てを自動化するWebアプリです。手作業による人為的ミスと参加人数変動への対応という構造的な問題を、Fisher-Yatesシャッフルで根本から解決しました。",
         stack: ["Next.js", "TypeScript"],
         badge: null,
-        github: "https://github.com/takahiro-hirano67/ziyuu-sikkou-bingo-num",
+        links: [
+            { id: "1", label: "Vercel", url: "https://ziyuu-sikkou-bingo-num.vercel.app" },
+            { id: "2", label: "GitHub", url: "https://github.com/takahiro-hirano67/ziyuu-sikkou-bingo-num" },
+        ],
         imagesLabel: "アプリケーション画面",
         imagesSubLabel: "画面",
         images: [
@@ -79,7 +95,7 @@ const WORKS = [
     },
 ];
 
-const RESEARCH_LIST = [
+const RESEARCH_LIST: ResearchData[] = [
     {
         id: "tech-matching",
         title: "特許をベースとする大規模言語モデルを用いた技術マッチング",
@@ -116,7 +132,7 @@ const RESEARCH_LIST = [
     },
 ];
 
-const SKILLS = [
+const SKILLS: SkillGroup[] = [
     {
         category: "バックエンド・データ",
         items: [
@@ -124,13 +140,13 @@ const SKILLS = [
                 name: "Python",
                 period: "2年",
                 usage: "インターン・研究",
-                note: "メイン言語。FastAPIを用いたAPI構築や、Docling・PyMuPDF等を利用した特許解析・データ処理で活用。",
+                note: "メイン言語。FastAPIを用いたAPI構築や、Docling・SudachiPy等を利用した特許解析・データ処理で活用。",
             },
             {
                 name: "PostgreSQL",
                 period: "1年半",
                 usage: "インターン・研究",
-                note: "数百万件の特許・法人データベースを構築。JSONB型の活用や、pgvectorを用いた意味検索などを運用。",
+                note: "数百万件の特許公報・法人情報データベースを構築。JSONB型及びXML型の活用や、PGroongaを用いた日本語検索、pgvectorを用いた意味検索などを運用。",
             },
             {
                 name: "FastAPI",
@@ -147,7 +163,7 @@ const SKILLS = [
                 name: "TypeScript",
                 period: "半年",
                 usage: "インターン・個人開発",
-                note: "Next.jsと組み合わせた開発の主軸。型安全性を担保し、Drizzle ORM等と連携して活用。",
+                note: "Next.jsと組み合わせた開発の主軸。型安全性を担保し、ZodやDrizzle ORM等と連携して活用。",
             },
             {
                 name: "Next.js / React",
@@ -193,7 +209,7 @@ const SKILLS = [
                 name: "Docker",
                 period: "半年",
                 usage: "インターン・個人開発",
-                note: "DockerfileやDocker Composeを用いた、複数コンテナ（API + DBなど）の開発環境構築。",
+                note: "DockerfileやDocker Composeを用いた、複数コンテナ（API + APP + DBなど）の開発環境構築。",
             },
             {
                 name: "Git / GitHub",
@@ -238,14 +254,17 @@ function Header() {
     return (
         <header className="fixed top-0 right-0 left-0 z-50 border-border-light border-b bg-surface/85 px-6 backdrop-blur-md">
             <div className="mx-auto flex h-14 w-full max-w-4xl items-center justify-between">
-                {/* 左側: 名前 */}
-                <span className="font-medium font-serif text-caption text-text-base tracking-wide transition-colors hover:text-accent">
+                {/* 左側： 名前 */}
+                <Link
+                    href="/"
+                    className="font-medium font-serif text-caption text-text-base tracking-wide transition-colors hover:text-accent"
+                >
                     {HEADER_DATA.title}
-                </span>
+                </Link>
 
                 {/* 右側: ナビゲーション */}
-                <div className="flex items-center gap-4 min-[480px]:gap-6">
-                    {HEADER_DATA.links.map((link) => (
+                <nav className="flex items-center gap-4 min-[480px]:gap-6">
+                    {HEADER_DATA.navLinks.map((link) => (
                         <a
                             key={link}
                             href={`#${link.toLowerCase()}`}
@@ -254,15 +273,22 @@ function Header() {
                             {link}
                         </a>
                     ))}
-                    <a
-                        href={HEADER_DATA.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="rounded-sm border border-border-base px-3 py-1.5 text-text-mid text-tiny transition-colors hover:border-accent hover:text-accent"
-                    >
-                        GitHub
-                    </a>
-                </div>
+                    {/* 外部リンク */}
+                    <div className="flex items-center gap-2">
+                        {HEADER_DATA.sns.map((item) => (
+                            <a
+                                key={item.id}
+                                href={item.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title={`${item.label}へのリンク`}
+                                className="rounded-sm border border-border-base bg-surface/50 px-3 py-1.5 text-text-mid text-tiny transition-colors hover:border-accent hover:text-accent"
+                            >
+                                {item.label}
+                            </a>
+                        ))}
+                    </div>
+                </nav>
             </div>
         </header>
     );
@@ -274,7 +300,7 @@ function Header() {
 
 function Hero() {
     return (
-        <section id="about" className="flex flex-col justify-center bg-bg-base px-6 pt-42 pb-12">
+        <section id="about" className="flex flex-col justify-center bg-bg-base px-6 pt-42 pb-6">
             <div className="mx-auto w-full max-w-4xl">
                 {/* トップヘッダー: 所属(左) / バッジ(右) */}
                 <div className="mb-4 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
@@ -304,9 +330,35 @@ function Hero() {
                 <h1 className="mb-8 font-semibold font-serif text-4xl text-text-base leading-tight">{PROFILE.name}</h1>
 
                 {/* 自己紹介文 */}
-                <div className="max-w-2xl">
+                <div className="mb-6 max-w-2xl">
                     <p className="text-body text-text-mid leading-relaxed">{PROFILE.description}</p>
                 </div>
+
+                {/* 外部リンク */}
+                {PROFILE.externalLinks && PROFILE.externalLinks.length > 0 && (
+                    <div className="max-w-2xl">
+                        <p className="mb-2 font-medium text-text-soft text-tiny uppercase tracking-widest">
+                            外部リンク
+                        </p>
+                        <div className="flex flex-wrap gap-x-6">
+                            {PROFILE.externalLinks.map((link) => (
+                                <a
+                                    key={link.id}
+                                    href={link.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    title={`${link.label}へのリンク`}
+                                    className="flex items-center gap-1 font-medium text-caption text-text-mid transition-colors hover:text-accent"
+                                >
+                                    {link.label}{" "}
+                                    <span className="text-text-mid text-tiny">
+                                        <LuExternalLink />
+                                    </span>
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                )}
             </div>
         </section>
     );
@@ -372,19 +424,24 @@ function Works() {
 
                                     {/* アクション */}
                                     <div className="flex shrink-0 items-center gap-2">
-                                        {work.github && (
+                                        {/* リンク配列を展開してボタンを生成 */}
+                                        {work.links?.map((link) => (
                                             <a
-                                                href={work.github}
+                                                key={link.id}
+                                                href={link.url}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="rounded-sm border border-border-base px-3 py-1.5 text-text-mid text-tiny transition-colors hover:border-accent hover:text-accent"
                                             >
-                                                GitHub
+                                                {link.label}
                                             </a>
-                                        )}
+                                        ))}
+
+                                        {/* 画像トグルボタン */}
                                         {work.images && work.images.length > 0 && (
                                             <button
                                                 type="button"
+                                                title="画像開閉ボタン"
                                                 onClick={() => toggleImages(work.id)}
                                                 className="rounded-sm px-3 py-1.5 font-medium text-tiny transition-colors"
                                                 style={{
@@ -419,7 +476,7 @@ function Works() {
                                 </div>
                             </div>
 
-                            {/* スクリーンショット表示エリア（スライダー形式） */}
+                            {/* 画像表示エリア（スライダー形式） */}
                             {work.images && work.images.length > 0 && activeWorkId === work.id && (
                                 <div
                                     className="mt-2 overflow-hidden rounded-sm border bg-surface"
@@ -547,6 +604,7 @@ function Research() {
                                     {research.images && research.images.length > 0 && (
                                         <button
                                             type="button"
+                                            title="画像開閉ボタン"
                                             onClick={() => toggleImages(research.id)}
                                             className="shrink-0 rounded-sm px-3 py-1.5 font-medium text-tiny transition-colors"
                                             style={{
@@ -765,13 +823,14 @@ function Skills() {
 
 function Footer() {
     return (
-        <footer className="border-border-base border-t px-6 py-6">
+        <footer className="mt-6 border-border-base border-t px-6 py-6 pt-6">
             <div className="mx-auto flex w-full max-w-4xl items-center justify-between">
                 <span className="text-text-soft text-tiny">© 2026 Takahiro Hirano. All Rights Reserved.</span>
                 <a
-                    href="https://github.com/takahiro-hirano67"
+                    href={GitHubLink}
                     target="_blank"
                     rel="noopener noreferrer"
+                    title="GitHubへのリンク"
                     className="text-text-soft text-tiny transition-colors hover:text-accent"
                 >
                     GitHub →
