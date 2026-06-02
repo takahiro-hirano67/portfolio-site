@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
 // --- データ ---
@@ -29,15 +30,20 @@ const PROFILE = {
 
 const WORKS = [
     {
-        id: "veridia",
-        name: "Veridia",
+        id: "veridea",
+        name: "Veridea",
         tagline: "根拠を辿れる知財探索の場",
         description:
             "特許文書を起点にアイデア生成・類似特許検索・協業先マッチングを行うWebアプリです。根拠を辿れる状態でLLMの生成物を観察できる空間を提供します。数百万件の特許公報・特許分類・法人情報を管理する自前のDBとAPIを整備し、バックエンドからフロントエンドまで一貫して実装しています。",
         stack: ["Next.js", "TypeScript", "FastAPI", "PostgreSQL", "Drizzle ORM"],
         badge: "開発中",
-        hasDemo: true,
         github: null,
+        screenshots: [
+            "/works/veridea/screenshot-1.jpg",
+            "/works/veridea/screenshot-2.jpg",
+            "/works/veridea/screenshot-3.jpg",
+            "/works/veridea/screenshot-4.jpg",
+        ],
     },
     {
         id: "academic-reader",
@@ -47,8 +53,8 @@ const WORKS = [
             "Doclingを用いて複雑な段組み・数式・図版を含む論文PDFを正確に構造化し、ブラウザ上でMarkdownとして表示するローカル専用ツールです。ブラウザの翻訳機能をそのまま使える点が特徴です。",
         stack: ["Next.js", "FastAPI", "Docling", "Docker"],
         badge: null,
-        hasDemo: false,
         github: "https://github.com/takahiro-hirano67/academic-reader",
+        screenshots: ["/works/academic-reader/screenshot-1.png"],
     },
     {
         id: "bingo",
@@ -58,8 +64,13 @@ const WORKS = [
             "自由ヶ丘執行委員会（学生組織）で利用するビンゴ大会の景品割り当てを自動化するWebアプリです。手作業による人為的ミスと参加人数変動への対応という構造的な問題を、Fisher-Yatesシャッフルで根本から解決しました。",
         stack: ["Next.js", "TypeScript"],
         badge: null,
-        hasDemo: false,
         github: "https://github.com/takahiro-hirano67/ziyuu-sikkou-bingo-num",
+        screenshots: [
+            "/works/bingo/screenshot-1.jpg",
+            "/works/bingo/screenshot-2.jpg",
+            "/works/bingo/screenshot-3.jpg",
+            "/works/bingo/screenshot-4.jpg",
+        ], // 画像なしの場合
     },
 ];
 
@@ -70,6 +81,24 @@ const RESEARCH_LIST = [
         subtitle: "形態素解析を用いたハルシネーション評価手法",
         description:
             "LLMを用いて特許技術を融合させ新規アイデアを生み出す際、もっともらしい事実の捏造（ハルシネーション）による論理飛躍が大きな課題となります。本研究では、生成テキストが特許原文（事実）にどれだけ基づいているかを定量的に評価する手法を確立し、各種プロンプト（生成手法）がハルシネーションに与える影響を検証しました。",
+        images: [
+            "/research/tech-matching/slide-1.png",
+            "/research/tech-matching/slide-2.png",
+            "/research/tech-matching/slide-3.png",
+            "/research/tech-matching/slide-4.png",
+            "/research/tech-matching/slide-5.png",
+            "/research/tech-matching/slide-6.png",
+            "/research/tech-matching/slide-7.png",
+            "/research/tech-matching/slide-8.png",
+            "/research/tech-matching/slide-9.png",
+            "/research/tech-matching/slide-10.png",
+            "/research/tech-matching/slide-11.png",
+            "/research/tech-matching/slide-12.png",
+            "/research/tech-matching/slide-13.png",
+            "/research/tech-matching/slide-14.png",
+            "/research/tech-matching/slide-15.png",
+            "/research/tech-matching/slide-16.png",
+        ],
         findings: [
             {
                 id: "1",
@@ -216,7 +245,7 @@ function Header() {
         <header className="fixed top-0 right-0 left-0 z-50 border-border-light border-b bg-surface/85 px-6 backdrop-blur-md">
             <div className="mx-auto flex h-14 w-full max-w-4xl items-center justify-between">
                 {/* 左側: 名前 */}
-                <span className="font-medium font-serif text-text-base text-tiny tracking-wide transition-colors hover:text-accent">
+                <span className="font-medium font-serif text-caption text-text-base tracking-wide transition-colors hover:text-accent">
                     {HEADER_DATA.title}
                 </span>
 
@@ -294,7 +323,21 @@ function Hero() {
 // ============================================================
 
 function Works() {
-    const [activeDemo, setActiveDemo] = useState<string | null>(null);
+    // 表示中の制作物ID
+    const [activeWorkId, setActiveWorkId] = useState<string | null>(null);
+    // 表示中の画像のインデックス
+    const [currentImgIndex, setCurrentImgIndex] = useState(0);
+
+    // ビューアーの開閉とインデックスのリセット
+    const toggleScreenshots = (workId: string) => {
+        if (activeWorkId === workId) {
+            setActiveWorkId(null);
+            setCurrentImgIndex(0);
+        } else {
+            setActiveWorkId(workId);
+            setCurrentImgIndex(0);
+        }
+    };
 
     return (
         <section id="works" className="bg-bg-base px-6 py-12">
@@ -311,12 +354,12 @@ function Works() {
                         <div key={work.id}>
                             {/* カード */}
                             <div
-                                className="rounded-sm border p-6 transition-all"
+                                className="rounded-sm border transition-all"
                                 style={{
                                     background: "var(--color-surface)",
-                                    borderColor:
-                                        activeDemo === work.id ? "var(--color-accent)" : "var(--color-border-base)",
-                                    boxShadow: activeDemo === work.id ? "0 2px 12px rgba(61,82,160,0.08)" : "none",
+                                    borderColor: "var(--color-border-base)",
+                                    boxShadow: activeWorkId === work.id ? "0 4px 16px rgba(0,0,0,0.06)" : "none",
+                                    padding: "1.5rem",
                                 }}
                             >
                                 {/* カードヘッダー */}
@@ -345,20 +388,20 @@ function Works() {
                                                 GitHub
                                             </a>
                                         )}
-                                        {work.hasDemo && (
+                                        {work.screenshots && work.screenshots.length > 0 && (
                                             <button
                                                 type="button"
-                                                onClick={() => setActiveDemo(activeDemo === work.id ? null : work.id)}
+                                                onClick={() => toggleScreenshots(work.id)}
                                                 className="rounded-sm px-3 py-1.5 font-medium text-tiny transition-colors"
                                                 style={{
                                                     background:
-                                                        activeDemo === work.id
+                                                        activeWorkId === work.id
                                                             ? "var(--color-accent)"
                                                             : "var(--color-accent-bg)",
-                                                    color: activeDemo === work.id ? "#fff" : "var(--color-accent)",
+                                                    color: activeWorkId === work.id ? "#fff" : "var(--color-accent)",
                                                 }}
                                             >
-                                                {activeDemo === work.id ? "デモを閉じる" : "デモを見る"}
+                                                {activeWorkId === work.id ? "画面を閉じる" : "画面を見る"}
                                             </button>
                                         )}
                                     </div>
@@ -380,28 +423,68 @@ function Works() {
                                 </div>
                             </div>
 
-                            {/* デモ埋め込みエリア */}
-                            {work.hasDemo && activeDemo === work.id && (
+                            {/* スクリーンショット表示エリア（スライダー形式） */}
+                            {work.screenshots && work.screenshots.length > 0 && activeWorkId === work.id && (
                                 <div
-                                    className="mt-2 overflow-hidden rounded-sm border"
-                                    style={{ borderColor: "var(--color-accent)" }}
+                                    className="mt-2 overflow-hidden rounded-sm border bg-surface"
+                                    style={{ borderColor: "var(--color-border-base)" }}
                                 >
-                                    {/* デモラベル */}
-                                    <div className="flex items-center justify-between border-accent border-b bg-accent-bg px-4 py-2">
-                                        <span className="font-medium text-accent text-tiny">
-                                            Veridia — アイデア生成レポート (モックデータ)
+                                    {/* ヘッダーラベル: タイトルと枚数表示 */}
+                                    <div className="flex items-center justify-between border-border-light border-b bg-bg-subtle px-4 py-2">
+                                        <span className="font-medium text-text-mid text-tiny">
+                                            {work.name} — アプリケーション画面
                                         </span>
-                                        <span className="text-accent text-tiny">APIなし / 静的デモ</span>
+                                        {work.screenshots.length > 1 && (
+                                            <span className="font-medium text-text-mid text-tiny">
+                                                {currentImgIndex + 1} / {work.screenshots.length}
+                                            </span>
+                                        )}
                                     </div>
 
-                                    {/* デモ本体 (移植したVerideaページが入る領域) */}
-                                    <div
-                                        className="flex items-center justify-center bg-bg-base"
-                                        style={{ height: "600px" }}
-                                    >
-                                        <p className="text-caption text-text-soft">
-                                            ここにVerideaのデモページが入ります
-                                        </p>
+                                    {/* スライダー本体 */}
+                                    <div className="group relative bg-bg-subtle p-2">
+                                        <div className="flex items-center justify-center">
+                                            <Image
+                                                src={work.screenshots[currentImgIndex]}
+                                                alt={`${work.name}の画面 ${currentImgIndex + 1}`}
+                                                width={1920}
+                                                height={1080}
+                                                className="h-auto w-full rounded-sm object-contain"
+                                                quality={90}
+                                            />
+                                        </div>
+
+                                        {/* ナビゲーションボタン（複数枚ある時のみ） */}
+                                        {work.screenshots.length > 1 && (
+                                            <>
+                                                <button
+                                                    type="button"
+                                                    onClick={() =>
+                                                        setCurrentImgIndex(
+                                                            (prev) =>
+                                                                (prev - 1 + work.screenshots.length) %
+                                                                work.screenshots.length,
+                                                        )
+                                                    }
+                                                    className="-translate-y-1/2 absolute top-1/2 left-4 rounded-full border border-border-strong bg-surface/80 p-1.5 text-text-mid opacity-0 transition-all hover:bg-surface hover:text-accent focus:opacity-100 group-hover:opacity-100"
+                                                    aria-label="前の画面"
+                                                >
+                                                    ←
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    onClick={() =>
+                                                        setCurrentImgIndex(
+                                                            (prev) => (prev + 1) % work.screenshots.length,
+                                                        )
+                                                    }
+                                                    className="-translate-y-1/2 absolute top-1/2 right-4 rounded-full border border-border-strong bg-surface/80 p-1.5 text-text-mid opacity-0 transition-all hover:bg-surface hover:text-accent focus:opacity-100 group-hover:opacity-100"
+                                                    aria-label="次の画面"
+                                                >
+                                                    →
+                                                </button>
+                                            </>
+                                        )}
                                     </div>
                                 </div>
                             )}
@@ -418,6 +501,22 @@ function Works() {
 // ============================================================
 
 function Research() {
+    // どの研究のスライドを表示しているか
+    const [activeResearchId, setActiveResearchId] = useState<string | null>(null);
+    // 表示中の研究において、何枚目のスライドを表示しているか
+    const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+
+    // スライドの開閉とインデックスのリセットを一元管理
+    const toggleSlides = (researchId: string) => {
+        if (activeResearchId === researchId) {
+            setActiveResearchId(null);
+            setCurrentSlideIndex(0);
+        } else {
+            setActiveResearchId(researchId);
+            setCurrentSlideIndex(0);
+        }
+    };
+
     return (
         <section id="research" className="bg-bg-base px-6 py-12">
             <div className="mx-auto w-full max-w-4xl">
@@ -428,85 +527,183 @@ function Research() {
                 </div>
 
                 {/* 研究リスト */}
-                <div className="space-y-4">
+                <div className="space-y-6">
                     {RESEARCH_LIST.map((research) => (
-                        <div key={research.id} className="rounded-sm border border-border-base bg-surface p-6">
-                            {/* カードヘッダー */}
-                            <div className="mb-4 flex items-start justify-between gap-4">
-                                <div>
-                                    <h3 className="mb-1 font-medium text-body text-text-base">{research.title}</h3>
-                                    {research.subtitle && (
-                                        <p className="text-caption text-text-mid">{research.subtitle}</p>
+                        <div key={research.id}>
+                            {/* カード本体 */}
+                            <div
+                                className="rounded-sm border transition-all"
+                                style={{
+                                    background: "var(--color-surface)",
+                                    borderColor: "var(--color-border-base)",
+                                    boxShadow:
+                                        activeResearchId === research.id ? "0 4px 16px rgba(0,0,0,0.06)" : "none",
+                                    padding: "1.5rem",
+                                }}
+                            >
+                                {/* カードヘッダー */}
+                                <div className="mb-4 flex items-start justify-between gap-4">
+                                    <div>
+                                        <h3 className="mb-1 font-medium text-body text-text-base">{research.title}</h3>
+                                        {research.subtitle && (
+                                            <p className="text-caption text-text-mid">{research.subtitle}</p>
+                                        )}
+                                    </div>
+
+                                    {/* スライド表示ボタン */}
+                                    {research.images && research.images.length > 0 && (
+                                        <button
+                                            type="button"
+                                            onClick={() => toggleSlides(research.id)}
+                                            className="shrink-0 rounded-sm px-3 py-1.5 font-medium text-tiny transition-colors"
+                                            style={{
+                                                background:
+                                                    activeResearchId === research.id
+                                                        ? "var(--color-accent)"
+                                                        : "var(--color-accent-bg)",
+                                                color:
+                                                    activeResearchId === research.id ? "#fff" : "var(--color-accent)",
+                                            }}
+                                        >
+                                            {activeResearchId === research.id ? "スライドを閉じる" : "スライドを見る"}
+                                        </button>
+                                    )}
+                                </div>
+
+                                {/* 概要 */}
+                                {research.description && (
+                                    <p className="mb-6 text-caption text-text-mid leading-relaxed">
+                                        {research.description}
+                                    </p>
+                                )}
+
+                                <div className="space-y-6">
+                                    {/* 主な発見・提案 */}
+                                    {research.findings && research.findings.length > 0 && (
+                                        <div className="space-y-2 border-border-light border-t pt-5">
+                                            <p className="font-medium text-text-soft text-tiny uppercase tracking-widest">
+                                                主な発見・提案
+                                            </p>
+                                            <div className="space-y-4">
+                                                {research.findings.map((finding) => (
+                                                    <div
+                                                        key={finding.label}
+                                                        className="flex flex-col gap-1 sm:flex-row sm:gap-4"
+                                                    >
+                                                        <p className="shrink-0 font-medium text-caption text-text-base sm:w-48">
+                                                            {finding.label}
+                                                        </p>
+                                                        <p className="text-caption text-text-mid leading-relaxed">
+                                                            {finding.description}
+                                                        </p>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* 成果 */}
+                                    {research.achievements && research.achievements.length > 0 && (
+                                        <div className="space-y-2 border-border-light border-t pt-5">
+                                            <p className="font-medium text-text-soft text-tiny uppercase tracking-widest">
+                                                成果
+                                            </p>
+                                            <div className="space-y-4">
+                                                {research.achievements.map((achievement) => (
+                                                    <div key={achievement.id} className="flex flex-col gap-1">
+                                                        <p className="font-medium text-caption text-text-base">
+                                                            {achievement.label}
+                                                        </p>
+                                                        <p className="text-caption text-text-mid">
+                                                            {achievement.description}
+                                                        </p>
+                                                        {achievement.url && (
+                                                            <div className="text-caption">
+                                                                <span className="text-text-base">URL: </span>
+                                                                <a
+                                                                    href={achievement.url}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    className="w-fit text-accent transition-colors hover:text-accent-hover hover:underline"
+                                                                >
+                                                                    {achievement.url}
+                                                                </a>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
                                     )}
                                 </div>
                             </div>
 
-                            {/* 概要 */}
-                            {research.description && (
-                                <p className="mb-6 text-caption text-text-mid leading-relaxed">
-                                    {research.description}
-                                </p>
-                            )}
+                            {/* 画像表示エリア（スライダー形式） */}
+                            {research.images && activeResearchId === research.id && (
+                                <div
+                                    className="mt-2 overflow-hidden rounded-sm border bg-surface"
+                                    style={{ borderColor: "var(--color-border-base)" }}
+                                >
+                                    {/* ヘッダーラベル: タイトルと枚数表示 */}
+                                    <div className="flex items-center justify-between border-border-light border-b bg-bg-subtle px-4 py-2">
+                                        <span className="font-medium text-text-mid text-tiny">
+                                            {research.title} — 発表スライド
+                                        </span>
+                                        {/* 複数枚ある時のみ枚数を表示 */}
+                                        {research.images.length > 1 && (
+                                            <span className="font-medium text-text-mid text-tiny">
+                                                {currentSlideIndex + 1} / {research.images.length}
+                                            </span>
+                                        )}
+                                    </div>
 
-                            <div className="space-y-6">
-                                {/* 指標と結論 */}
-                                {research.findings && research.findings.length > 0 && (
-                                    <div className="space-y-2 border-border-light border-t pt-5">
-                                        <p className="font-medium text-text-soft text-tiny uppercase tracking-widest">
-                                            主な発見・提案
-                                        </p>
-                                        <div className="space-y-4">
-                                            {research.findings.map((finding) => (
-                                                <div
-                                                    key={finding.label}
-                                                    className="flex flex-col gap-1 sm:flex-row sm:gap-4"
+                                    {/* スライダー本体 */}
+                                    <div className="group relative bg-bg-subtle p-2">
+                                        <div className="flex items-center justify-center">
+                                            <Image
+                                                src={research.images[currentSlideIndex]}
+                                                alt={`${research.title}のスライド ${currentSlideIndex + 1}`}
+                                                width={1920}
+                                                height={1080}
+                                                className="h-auto w-full rounded-sm object-contain shadow-sm"
+                                                quality={90}
+                                            />
+                                        </div>
+
+                                        {/* ナビゲーションボタン（複数枚ある時のみ） */}
+                                        {research.images.length > 1 && (
+                                            <>
+                                                <button
+                                                    type="button"
+                                                    onClick={() =>
+                                                        setCurrentSlideIndex(
+                                                            (prev) =>
+                                                                (prev - 1 + research.images.length) %
+                                                                research.images.length,
+                                                        )
+                                                    }
+                                                    className="-translate-y-1/2 absolute top-1/2 left-4 rounded-full border border-border-strong bg-surface/80 p-1.5 text-text-mid opacity-0 transition-all hover:bg-surface hover:text-accent focus:opacity-100 group-hover:opacity-100"
+                                                    aria-label="前のスライド"
                                                 >
-                                                    <p className="shrink-0 font-medium text-caption text-text-base sm:w-48">
-                                                        {finding.label}
-                                                    </p>
-                                                    <p className="text-caption text-text-mid leading-relaxed">
-                                                        {finding.description}
-                                                    </p>
-                                                </div>
-                                            ))}
-                                        </div>
+                                                    ←
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    onClick={() =>
+                                                        setCurrentSlideIndex(
+                                                            (prev) => (prev + 1) % research.images.length,
+                                                        )
+                                                    }
+                                                    className="-translate-y-1/2 absolute top-1/2 right-4 rounded-full border border-border-strong bg-surface/80 p-1.5 text-text-mid opacity-0 transition-all hover:bg-surface hover:text-accent focus:opacity-100 group-hover:opacity-100"
+                                                    aria-label="次のスライド"
+                                                >
+                                                    →
+                                                </button>
+                                            </>
+                                        )}
                                     </div>
-                                )}
-
-                                {/* 成果 */}
-                                {research.achievements && research.achievements.length > 0 && (
-                                    <div className="space-y-2 border-border-light border-t pt-5">
-                                        <p className="font-medium text-text-soft text-tiny uppercase tracking-widest">
-                                            成果
-                                        </p>
-                                        <div className="space-y-4">
-                                            {research.achievements.map((achievement) => (
-                                                <div key={achievement.id} className="flex flex-col gap-1">
-                                                    <p className="font-medium text-caption text-text-base">
-                                                        {achievement.label}
-                                                    </p>
-                                                    <p className="text-caption text-text-mid">
-                                                        {achievement.description}
-                                                    </p>
-                                                    {achievement.url && (
-                                                        <div className="text-caption">
-                                                            <span className="text-text-base">URL: </span>
-                                                            <a
-                                                                href={achievement.url}
-                                                                target="_blank"
-                                                                rel="noopener noreferrer"
-                                                                className="w-fit text-accent transition-colors hover:text-accent-hover hover:underline"
-                                                            >
-                                                                {achievement.url}
-                                                            </a>
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
+                                </div>
+                            )}
                         </div>
                     ))}
                 </div>
