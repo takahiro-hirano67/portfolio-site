@@ -23,6 +23,10 @@ const PROFILE = {
         },
         {
             id: "2",
+            label: "自由ヶ丘執行委員会 財政",
+        },
+        {
+            id: "3",
             label: "2028年卒業見込み",
         },
     ],
@@ -38,12 +42,9 @@ const WORKS = [
         stack: ["Next.js", "TypeScript", "FastAPI", "PostgreSQL", "Drizzle ORM"],
         badge: "開発中",
         github: null,
-        screenshots: [
-            "/works/veridea/screenshot-1.jpg",
-            "/works/veridea/screenshot-2.jpg",
-            "/works/veridea/screenshot-3.jpg",
-            "/works/veridea/screenshot-4.jpg",
-        ],
+        imagesLabel: "アプリケーション画面",
+        imagesSubLabel: "画面",
+        images: ["/works/veridea/screenshot-1.jpg"],
     },
     {
         id: "academic-reader",
@@ -54,7 +55,9 @@ const WORKS = [
         stack: ["Next.js", "FastAPI", "Docling", "Docker"],
         badge: null,
         github: "https://github.com/takahiro-hirano67/academic-reader",
-        screenshots: ["/works/academic-reader/screenshot-1.png"],
+        imagesLabel: "アプリケーション画面",
+        imagesSubLabel: "画面",
+        images: ["/works/academic-reader/screenshot-1.png"],
     },
     {
         id: "bingo",
@@ -65,12 +68,14 @@ const WORKS = [
         stack: ["Next.js", "TypeScript"],
         badge: null,
         github: "https://github.com/takahiro-hirano67/ziyuu-sikkou-bingo-num",
-        screenshots: [
+        imagesLabel: "アプリケーション画面",
+        imagesSubLabel: "画面",
+        images: [
             "/works/bingo/screenshot-1.jpg",
             "/works/bingo/screenshot-2.jpg",
             "/works/bingo/screenshot-3.jpg",
             "/works/bingo/screenshot-4.jpg",
-        ], // 画像なしの場合
+        ],
     },
 ];
 
@@ -81,23 +86,12 @@ const RESEARCH_LIST = [
         subtitle: "形態素解析を用いたハルシネーション評価手法",
         description:
             "LLMを用いて特許技術を融合させ新規アイデアを生み出す際、もっともらしい事実の捏造（ハルシネーション）による論理飛躍が大きな課題となります。本研究では、生成テキストが特許原文（事実）にどれだけ基づいているかを定量的に評価する手法を確立し、各種プロンプト（生成手法）がハルシネーションに与える影響を検証しました。",
+        imagesLabel: "説明スライド（抜粋）",
+        imagesSubLabel: "スライド",
         images: [
             "/research/tech-matching/slide-1.png",
             "/research/tech-matching/slide-2.png",
             "/research/tech-matching/slide-3.png",
-            "/research/tech-matching/slide-4.png",
-            "/research/tech-matching/slide-5.png",
-            "/research/tech-matching/slide-6.png",
-            "/research/tech-matching/slide-7.png",
-            "/research/tech-matching/slide-8.png",
-            "/research/tech-matching/slide-9.png",
-            "/research/tech-matching/slide-10.png",
-            "/research/tech-matching/slide-11.png",
-            "/research/tech-matching/slide-12.png",
-            "/research/tech-matching/slide-13.png",
-            "/research/tech-matching/slide-14.png",
-            "/research/tech-matching/slide-15.png",
-            "/research/tech-matching/slide-16.png",
         ],
         findings: [
             {
@@ -326,16 +320,16 @@ function Works() {
     // 表示中の制作物ID
     const [activeWorkId, setActiveWorkId] = useState<string | null>(null);
     // 表示中の画像のインデックス
-    const [currentImgIndex, setCurrentImgIndex] = useState(0);
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     // ビューアーの開閉とインデックスのリセット
-    const toggleScreenshots = (workId: string) => {
+    const toggleImages = (workId: string) => {
         if (activeWorkId === workId) {
             setActiveWorkId(null);
-            setCurrentImgIndex(0);
+            setCurrentImageIndex(0);
         } else {
             setActiveWorkId(workId);
-            setCurrentImgIndex(0);
+            setCurrentImageIndex(0);
         }
     };
 
@@ -388,10 +382,10 @@ function Works() {
                                                 GitHub
                                             </a>
                                         )}
-                                        {work.screenshots && work.screenshots.length > 0 && (
+                                        {work.images && work.images.length > 0 && (
                                             <button
                                                 type="button"
-                                                onClick={() => toggleScreenshots(work.id)}
+                                                onClick={() => toggleImages(work.id)}
                                                 className="rounded-sm px-3 py-1.5 font-medium text-tiny transition-colors"
                                                 style={{
                                                     background:
@@ -401,7 +395,9 @@ function Works() {
                                                     color: activeWorkId === work.id ? "#fff" : "var(--color-accent)",
                                                 }}
                                             >
-                                                {activeWorkId === work.id ? "画面を閉じる" : "画面を見る"}
+                                                {activeWorkId === work.id
+                                                    ? `${work.imagesSubLabel}を閉じる`
+                                                    : `${work.imagesSubLabel}を見る`}
                                             </button>
                                         )}
                                     </div>
@@ -424,7 +420,7 @@ function Works() {
                             </div>
 
                             {/* スクリーンショット表示エリア（スライダー形式） */}
-                            {work.screenshots && work.screenshots.length > 0 && activeWorkId === work.id && (
+                            {work.images && work.images.length > 0 && activeWorkId === work.id && (
                                 <div
                                     className="mt-2 overflow-hidden rounded-sm border bg-surface"
                                     style={{ borderColor: "var(--color-border-base)" }}
@@ -432,11 +428,11 @@ function Works() {
                                     {/* ヘッダーラベル: タイトルと枚数表示 */}
                                     <div className="flex items-center justify-between border-border-light border-b bg-bg-subtle px-4 py-2">
                                         <span className="font-medium text-text-mid text-tiny">
-                                            {work.name} — アプリケーション画面
+                                            {work.name} — {work.imagesLabel}
                                         </span>
-                                        {work.screenshots.length > 1 && (
+                                        {work.images.length > 1 && (
                                             <span className="font-medium text-text-mid text-tiny">
-                                                {currentImgIndex + 1} / {work.screenshots.length}
+                                                {currentImageIndex + 1} / {work.images.length}
                                             </span>
                                         )}
                                     </div>
@@ -445,8 +441,8 @@ function Works() {
                                     <div className="group relative bg-bg-subtle p-2">
                                         <div className="flex items-center justify-center">
                                             <Image
-                                                src={work.screenshots[currentImgIndex]}
-                                                alt={`${work.name}の画面 ${currentImgIndex + 1}`}
+                                                src={work.images[currentImageIndex]}
+                                                alt={`${work.name}の${work.imagesSubLabel} ${currentImageIndex + 1}`}
                                                 width={1920}
                                                 height={1080}
                                                 className="h-auto w-full rounded-sm object-contain"
@@ -455,31 +451,28 @@ function Works() {
                                         </div>
 
                                         {/* ナビゲーションボタン（複数枚ある時のみ） */}
-                                        {work.screenshots.length > 1 && (
+                                        {work.images.length > 1 && (
                                             <>
                                                 <button
                                                     type="button"
                                                     onClick={() =>
-                                                        setCurrentImgIndex(
+                                                        setCurrentImageIndex(
                                                             (prev) =>
-                                                                (prev - 1 + work.screenshots.length) %
-                                                                work.screenshots.length,
+                                                                (prev - 1 + work.images.length) % work.images.length,
                                                         )
                                                     }
                                                     className="-translate-y-1/2 absolute top-1/2 left-4 rounded-full border border-border-strong bg-surface/80 p-1.5 text-text-mid opacity-0 transition-all hover:bg-surface hover:text-accent focus:opacity-100 group-hover:opacity-100"
-                                                    aria-label="前の画面"
+                                                    aria-label={`前の${work.imagesSubLabel}`}
                                                 >
                                                     ←
                                                 </button>
                                                 <button
                                                     type="button"
                                                     onClick={() =>
-                                                        setCurrentImgIndex(
-                                                            (prev) => (prev + 1) % work.screenshots.length,
-                                                        )
+                                                        setCurrentImageIndex((prev) => (prev + 1) % work.images.length)
                                                     }
                                                     className="-translate-y-1/2 absolute top-1/2 right-4 rounded-full border border-border-strong bg-surface/80 p-1.5 text-text-mid opacity-0 transition-all hover:bg-surface hover:text-accent focus:opacity-100 group-hover:opacity-100"
-                                                    aria-label="次の画面"
+                                                    aria-label={`次の${work.imagesSubLabel}`}
                                                 >
                                                     →
                                                 </button>
@@ -501,19 +494,19 @@ function Works() {
 // ============================================================
 
 function Research() {
-    // どの研究のスライドを表示しているか
+    // どの研究の画像を表示しているか
     const [activeResearchId, setActiveResearchId] = useState<string | null>(null);
-    // 表示中の研究において、何枚目のスライドを表示しているか
-    const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+    // 表示中の研究において、何枚目の画像を表示しているか
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-    // スライドの開閉とインデックスのリセットを一元管理
-    const toggleSlides = (researchId: string) => {
+    // ビューアーの開閉とインデックスのリセットを一元管理
+    const toggleImages = (researchId: string) => {
         if (activeResearchId === researchId) {
             setActiveResearchId(null);
-            setCurrentSlideIndex(0);
+            setCurrentImageIndex(0);
         } else {
             setActiveResearchId(researchId);
-            setCurrentSlideIndex(0);
+            setCurrentImageIndex(0);
         }
     };
 
@@ -550,11 +543,11 @@ function Research() {
                                         )}
                                     </div>
 
-                                    {/* スライド表示ボタン */}
+                                    {/* 画像表示ボタン */}
                                     {research.images && research.images.length > 0 && (
                                         <button
                                             type="button"
-                                            onClick={() => toggleSlides(research.id)}
+                                            onClick={() => toggleImages(research.id)}
                                             className="shrink-0 rounded-sm px-3 py-1.5 font-medium text-tiny transition-colors"
                                             style={{
                                                 background:
@@ -565,7 +558,9 @@ function Research() {
                                                     activeResearchId === research.id ? "#fff" : "var(--color-accent)",
                                             }}
                                         >
-                                            {activeResearchId === research.id ? "スライドを閉じる" : "スライドを見る"}
+                                            {activeResearchId === research.id
+                                                ? `${research.imagesSubLabel}を閉じる`
+                                                : `${research.imagesSubLabel}を見る`}
                                         </button>
                                     )}
                                 </div>
@@ -584,7 +579,7 @@ function Research() {
                                             <p className="font-medium text-text-soft text-tiny uppercase tracking-widest">
                                                 主な発見・提案
                                             </p>
-                                            <div className="space-y-4">
+                                            <div className="space-y-2">
                                                 {research.findings.map((finding) => (
                                                     <div
                                                         key={finding.label}
@@ -608,7 +603,7 @@ function Research() {
                                             <p className="font-medium text-text-soft text-tiny uppercase tracking-widest">
                                                 成果
                                             </p>
-                                            <div className="space-y-4">
+                                            <div className="space-y-2">
                                                 {research.achievements.map((achievement) => (
                                                     <div key={achievement.id} className="flex flex-col gap-1">
                                                         <p className="font-medium text-caption text-text-base">
@@ -647,12 +642,12 @@ function Research() {
                                     {/* ヘッダーラベル: タイトルと枚数表示 */}
                                     <div className="flex items-center justify-between border-border-light border-b bg-bg-subtle px-4 py-2">
                                         <span className="font-medium text-text-mid text-tiny">
-                                            {research.title} — 発表スライド
+                                            {research.title} — {research.imagesLabel}
                                         </span>
                                         {/* 複数枚ある時のみ枚数を表示 */}
                                         {research.images.length > 1 && (
                                             <span className="font-medium text-text-mid text-tiny">
-                                                {currentSlideIndex + 1} / {research.images.length}
+                                                {currentImageIndex + 1} / {research.images.length}
                                             </span>
                                         )}
                                     </div>
@@ -661,8 +656,8 @@ function Research() {
                                     <div className="group relative bg-bg-subtle p-2">
                                         <div className="flex items-center justify-center">
                                             <Image
-                                                src={research.images[currentSlideIndex]}
-                                                alt={`${research.title}のスライド ${currentSlideIndex + 1}`}
+                                                src={research.images[currentImageIndex]}
+                                                alt={`${research.title}の${research.imagesSubLabel} ${currentImageIndex + 1}`}
                                                 width={1920}
                                                 height={1080}
                                                 className="h-auto w-full rounded-sm object-contain shadow-sm"
@@ -676,26 +671,26 @@ function Research() {
                                                 <button
                                                     type="button"
                                                     onClick={() =>
-                                                        setCurrentSlideIndex(
+                                                        setCurrentImageIndex(
                                                             (prev) =>
                                                                 (prev - 1 + research.images.length) %
                                                                 research.images.length,
                                                         )
                                                     }
                                                     className="-translate-y-1/2 absolute top-1/2 left-4 rounded-full border border-border-strong bg-surface/80 p-1.5 text-text-mid opacity-0 transition-all hover:bg-surface hover:text-accent focus:opacity-100 group-hover:opacity-100"
-                                                    aria-label="前のスライド"
+                                                    aria-label={`前の${research.imagesSubLabel}`}
                                                 >
                                                     ←
                                                 </button>
                                                 <button
                                                     type="button"
                                                     onClick={() =>
-                                                        setCurrentSlideIndex(
+                                                        setCurrentImageIndex(
                                                             (prev) => (prev + 1) % research.images.length,
                                                         )
                                                     }
                                                     className="-translate-y-1/2 absolute top-1/2 right-4 rounded-full border border-border-strong bg-surface/80 p-1.5 text-text-mid opacity-0 transition-all hover:bg-surface hover:text-accent focus:opacity-100 group-hover:opacity-100"
-                                                    aria-label="次のスライド"
+                                                    aria-label={`次の${research.imagesSubLabel}`}
                                                 >
                                                     →
                                                 </button>
@@ -771,7 +766,6 @@ function Skills() {
 function Footer() {
     return (
         <footer className="border-border-base border-t px-6 py-6">
-            {/* 内側に w-full max-w-4xl のラッパーを追加 */}
             <div className="mx-auto flex w-full max-w-4xl items-center justify-between">
                 <span className="text-text-soft text-tiny">© 2026 Takahiro Hirano. All Rights Reserved.</span>
                 <a
