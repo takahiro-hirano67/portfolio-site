@@ -67,7 +67,7 @@ export default function Research({ researchList }: ResearchProps) {
                                             type="button"
                                             title="画像開閉ボタン"
                                             onClick={() => toggleImages(research.id)}
-                                            className="shrink-0 rounded-sm px-3 py-1.5 font-medium text-tiny transition-colors"
+                                            className="shrink-0 cursor-pointer rounded-sm border border-surface px-3 py-1.5 font-medium text-tiny transition-colors hover:border-accent"
                                             style={{
                                                 background:
                                                     activeResearchId === research.id

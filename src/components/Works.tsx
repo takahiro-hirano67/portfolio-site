@@ -86,7 +86,7 @@ export default function Works({ works }: WorksProps) {
                                                 type="button"
                                                 title="画像開閉ボタン"
                                                 onClick={() => toggleImages(work.id)}
-                                                className="rounded-sm px-3 py-1.5 font-medium text-tiny transition-colors"
+                                                className="cursor-pointer rounded-sm border border-surface px-3 py-1.5 font-medium text-tiny transition-colors hover:border-accent"
                                                 style={{
                                                     background:
                                                         activeWorkId === work.id
