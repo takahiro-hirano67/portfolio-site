@@ -47,7 +47,15 @@
     --font-weight-body: 400; /* 本文 */
 }
 
-/* @theme 外に通常のCSSとして記述 */
+/* --- @theme 外に通常のCSSとして記述 --- */
+
+html {
+    /* スムーススクロール */
+    scroll-behavior: smooth;
+    /* ヘッダーが固定（fixed）されているため、スクロールの停止位置をヘッダーの高さ分（56px）ずらす */
+    scroll-padding-top: 56px;
+}
+
 body {
     margin: 0;
     font-size: var(--text-body);
