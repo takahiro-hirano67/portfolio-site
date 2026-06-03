@@ -6,6 +6,7 @@ import type { HeaderData, ProfileData, ResearchData, SkillGroup, WorkData } from
 
 export const GitHubLink = "https://github.com/takahiro-hirano67";
 export const QiitaLink = "https://qiita.com/takahiro-hirano67";
+export const PortfolioRepoLink = "https://github.com/takahiro-hirano67/portfolio-site";
 
 // ============================================================
 // ヘッダー
