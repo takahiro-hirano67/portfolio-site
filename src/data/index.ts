@@ -44,7 +44,7 @@ export const PROFILE: ProfileData = {
 
 export const WORKS: WorkData[] = [
     {
-        id: "1",
+        id: "veridea",
         name: "Veridea",
         tagline: "根拠を辿れる知財探索の場",
         description:
@@ -67,7 +67,7 @@ export const WORKS: WorkData[] = [
         images: ["/works/veridea/screenshot-1.jpg"],
     },
     {
-        id: "2",
+        id: "academic-reader",
         name: "academic-reader",
         tagline: "学術論文PDFの構造化ビューワー",
         description:
@@ -80,11 +80,11 @@ export const WORKS: WorkData[] = [
         images: ["/works/academic-reader/screenshot-1.png"],
     },
     {
-        id: "3",
+        id: "ziyuu-sikkou-bingo-num",
         name: "ziyuu-sikkou-bingo-num",
         tagline: "イベント景品番号管理アプリ",
         description:
-            "自由ヶ丘執行委員会（学生組織）で利用するビンゴ大会の景品割り当てを自動化するWebアプリです。手作業による人為的ミスと参加人数変動への対応という構造的な問題を、Fisher-Yatesシャッフルで根本から解決しました。",
+            "自由ヶ丘執行委員会（学生組織）で利用するビンゴ大会の景品割り当てを自動化するWebアプリです。手作業による人為的ミスと参加人数変動への対応という構造的な問題を、Fisher-Yatesシャッフルで根本から解決します。実際にイベント本番で利用し、ミスなく運用できました。",
         stack: ["Next.js", "TypeScript"],
         badge: null,
         links: [
@@ -100,6 +100,54 @@ export const WORKS: WorkData[] = [
             "/works/bingo/screenshot-4.jpg",
         ],
     },
+    {
+        id: "walking-assistant-ai",
+        name: "白杖×AI歩行支援デバイス",
+        tagline: "世界を探索する楽しさを提供するアタッチメント",
+        description:
+            "視覚障がいを持つ方へ「風景を知る喜び」を提供することを目的とした、白杖装着型のデバイス（プロトタイプ）です。ボタンを押すと内蔵カメラが周囲を撮影し、Gemini APIを用いて生成した風景の解説をイヤホンから音声（Open JTalk）で読み上げます。大学の3DCADの講義課題をきっかけに、Raspberry Piの調達からPythonでのマルチスレッド制御、LLMのプロンプトチューニングまで、一から自力で調査し実装を行いました。既存アプリと異なり「スマホのリソースを占有しない」専用ハードウェアとしての独立性を意識して設計しています。",
+        stack: [
+            "Python",
+            "Raspberry Pi",
+            "Camera Module",
+            "Gemini API",
+            "Open JTalk",
+            "AutoCAD 3D (3D CAD)",
+            "FlashPrint5 (スライサーソフト)",
+        ],
+        badge: "プロトタイプ",
+        links: [{ id: "1", label: "GitHub", url: "https://github.com/takahiro-hirano67/Walking-Assistant-AI" }],
+        imagesLabel: "発表スライド(抜粋)・開発中の様子",
+        imagesSubLabel: "資料",
+        images: [
+            "/works/walking-assistant-ai/slide-1.svg",
+            "/works/walking-assistant-ai/slide-2.svg",
+            "/works/walking-assistant-ai/slide-3.svg",
+            "/works/walking-assistant-ai/photo-1.jpg",
+        ],
+    },
+    {
+        id: "management-simulation-game",
+        name: "きみが社長だ！〜参加型経営シミュレーション〜",
+        tagline: "小学生向けのマルチエンディング型経営体験アプリ",
+        description:
+            "小学校の「6年生を送る会」の出し物として企画・開発した参加型のシミュレーションゲームです。子どもたちが「お菓子メーカーの社長」となり、経営課題に対して多数決で選択肢を決定します。利益（お金）と社会的責任（信用）のパラメーターが変動し、結末が分岐する仕組みです。生成AIで作成した親しみやすいスライドをNext.js上のWebアプリに組み込み、状態管理を行いました。保護者の方との打ち合わせや、実際の体育館での進行も担当し、コードを書くこと以上に「ユーザーにどう楽しんで学びを得てもらうか」という体験設計の重要性を学ぶ貴重な経験となりました。",
+        stack: ["Next.js", "TypeScript", "NotebookLM (画像生成)"],
+        badge: "イベント企画",
+        links: [
+            { id: "1", label: "Vercel", url: "https://board-game-circle-recreation.vercel.app/game" },
+            { id: "2", label: "GitHub", url: "https://github.com/takahiro-hirano67/board-game-circle-recreation" },
+        ],
+        imagesLabel: "実施風景・アプリケーション画面",
+        imagesSubLabel: "資料",
+        images: [
+            "/works/management-simulation-game/photo-1.png",
+            "/works/management-simulation-game/slide-1.svg",
+            "/works/management-simulation-game/slide-2.svg",
+            "/works/management-simulation-game/slide-3.svg",
+            "/works/management-simulation-game/screenshot-1.jpg",
+        ],
+    },
 ];
 
 // ============================================================
@@ -113,7 +161,7 @@ export const RESEARCH_LIST: ResearchData[] = [
         subtitle: "形態素解析を用いたハルシネーション評価手法",
         description:
             "LLMを用いて特許技術を融合させ新規アイデアを生み出す際、もっともらしい事実の捏造（ハルシネーション）による論理飛躍が大きな課題となります。本研究では、生成テキストが特許原文（事実）にどれだけ基づいているかを定量的に評価する手法を確立し、各種プロンプト（生成手法）がハルシネーションに与える影響を検証しました。",
-        imagesLabel: "説明スライド（抜粋）",
+        imagesLabel: "発表スライド(抜粋)",
         imagesSubLabel: "スライド",
         images: [
             "/research/tech-matching/slide-1.png",
