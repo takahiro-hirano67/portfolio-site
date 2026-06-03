@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import { notoSansJp, notoSerifJp } from "@/config/font-config";
+import { siteMetadata } from "@/config/metadata";
 import "./globals.css";
 
-export const metadata: Metadata = {
-    title: "Takahiro Hirano | 平野貴大のポートフォリオサイト",
-    description: "平野貴大のポートフォリオサイト。ITエンジニア就活生 / 制作物、研究内容、スキルセットをご紹介します。",
-};
+// メタデータをエクスポート
+export const metadata: Metadata = siteMetadata;
 
 /**
  * トップレベルのレイアウト
