@@ -1,14 +1,14 @@
 import type { HeaderData, ProfileData, ResearchData, SkillGroup, WorkData } from "@/types";
 
-// --- 定数 ---
+// ============================================================
+// リンク
+// ============================================================
 
 export const GitHubLink = "https://github.com/takahiro-hirano67";
 export const QiitaLink = "https://qiita.com/takahiro-hirano67";
 
-// --- データ ---
-
 // ============================================================
-// ヘッダー (HEADER_DATA)
+// ヘッダー
 // ============================================================
 
 export const HEADER_DATA: HeaderData = {
@@ -18,7 +18,7 @@ export const HEADER_DATA: HeaderData = {
 };
 
 // ============================================================
-// 基本情報 (PROFILE)
+// 基本情報
 // ============================================================
 
 export const PROFILE: ProfileData = {
@@ -38,7 +38,7 @@ export const PROFILE: ProfileData = {
 };
 
 // ============================================================
-// 制作物 (WORKS_DATA)
+// 制作物
 // ============================================================
 
 export const WORKS: WorkData[] = [
@@ -102,7 +102,7 @@ export const WORKS: WorkData[] = [
 ];
 
 // ============================================================
-// 研究 (RESEARCH_LIST)
+// 研究
 // ============================================================
 
 export const RESEARCH_LIST: ResearchData[] = [
@@ -143,7 +143,7 @@ export const RESEARCH_LIST: ResearchData[] = [
 ];
 
 // ============================================================
-// スキルセット (SKILLS)
+// スキルセット
 // ============================================================
 
 export const SKILLS: SkillGroup[] = [
