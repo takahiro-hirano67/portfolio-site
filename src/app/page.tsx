@@ -1,10 +1,10 @@
+import FadeIn from "@/components/FadeIn";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Research from "@/components/Research";
 import Skills from "@/components/Skills";
 import Works from "@/components/Works";
-import FadeIn from "@/components/FadeIn"; // ← 追加
 import { HEADER_DATA, PROFILE, RESEARCH_LIST, SKILLS, WORKS } from "@/data";
 
 /**
