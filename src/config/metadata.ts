@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 const siteName = "Takahiro Hirano | 平野貴大のポートフォリオサイト";
 const description =
     "平野貴大のポートフォリオサイト。ITエンジニア就活生 / 制作物、研究内容、スキルセットをご紹介します。";
-// ※Vercel等でデプロイした際の本番URL
+// 本番URL
 export const SITE_URL = "https://takahiro-hirano67.vercel.app";
 
 export const siteMetadata: Metadata = {
