@@ -1,0 +1,330 @@
+/*
+    ============================================================
+    Markdownのスタイルを適用するCSS
+
+    デザイン方針:
+    - フォント: Noto Serif JP (読む領域) を基本とする
+    - カラー: globals.css のデザイントークン (CSS変数) を参照
+    - 余白: 広めに取り、文字を読む行為を邪魔しない
+    - コードブロック: bg-base をベースに、surface との差で浮かせる
+    ============================================================
+*/
+
+/*
+    ============================================================
+    Markdown全体
+    ============================================================
+*/
+
+.markdown {
+    /* Noto Serif JP を使用。必要な箇所のみ Noto Sans JP を指定 */
+    font-family: var(--font-serif);
+    /* 必要な箇所のみ別のテキストカラーを指定 */
+    color: var(--color-text-base);
+}
+
+/*
+    ============================================================
+    見出し
+    ============================================================
+*/
+
+.markdown h1 {
+    font-family: var(--font-serif);
+    font-size: var(--text-display);
+    font-weight: var(--font-weight-heading);
+    margin: 1rem 0 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.markdown h2 {
+    font-family: var(--font-serif);
+    font-size: var(--text-heading);
+    font-weight: var(--font-weight-heading);
+    margin: 1.75rem 0 0.5rem;
+}
+
+.markdown h3 {
+    font-family: var(--font-serif);
+    font-size: var(--text-subheading);
+    font-weight: var(--font-weight-heading);
+    margin: 1.5rem 0 0.4rem;
+}
+
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+    font-family: var(--font-serif);
+    font-size: var(--text-body);
+    font-weight: var(--font-weight-heading);
+    color: var(--color-text-base);
+    margin: 1.25rem 0 0.4rem;
+}
+
+/*
+    ============================================================
+    本文
+    ============================================================
+*/
+
+.markdown p {
+    font-family: var(--font-serif);
+    font-size: var(--text-body);
+    line-height: 1.85;
+    margin-bottom: 1rem;
+}
+
+.markdown hr {
+    border: none;
+    border-top: 1px solid var(--color-border-base);
+    margin: 1.5rem 0;
+}
+
+/*
+    ============================================================
+    太字・斜体
+    ============================================================
+*/
+
+.markdown strong {
+    font-weight: var(--font-weight-heading);
+}
+
+.markdown em {
+    font-style: italic;
+    color: var(--color-text-mid);
+}
+
+/*
+    ============================================================
+    リスト
+    ============================================================
+*/
+
+.markdown ul,
+.markdown ol {
+    padding-left: 1.5rem;
+    margin: 0.5rem 0 1rem;
+}
+
+.markdown li {
+    font-family: var(--font-serif);
+    font-size: var(--text-body);
+    line-height: 1.85;
+    padding-left: 0.25rem;
+    margin-bottom: 0.4rem;
+    list-style-position: outside;
+}
+
+.markdown ul li {
+    list-style-type: disc;
+}
+
+.markdown ol li {
+    list-style-type: decimal;
+}
+
+.markdown ul li p,
+.markdown ol li p {
+    margin: 0.4rem 0;
+}
+
+/*
+    ============================================================
+    区切り線
+    ============================================================
+*/
+
+.markdown hr {
+    margin: 0.75rem 0.4rem;
+}
+
+/* 
+    ============================================================
+    リンク
+    ============================================================
+*/
+
+.markdown a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-color: var(--color-accent-bg);
+    transition: text-decoration-color 0.15s;
+}
+
+.markdown a:hover {
+    text-decoration-color: var(--color-accent);
+}
+
+/*
+    ============================================================
+    インラインコード
+    複数行のコードブロックは MarkdownViewer.tsx 内で直接指定
+    ============================================================
+*/
+
+/* インラインコード（コンポーネント側で .inline-code を付与） */
+.markdown .inline-code {
+    font-family: "Fira Mono", "Menlo", "Consolas", monospace;
+    font-size: 0.85em;
+    color: var(--color-md-code);
+    background-color: var(--color-surface-muted);
+    border: 1px solid var(--color-border-base);
+    border-radius: 4px;
+    padding: 0.15em 0.4em;
+    margin: 0 0.15em;
+    word-break: break-all;
+}
+
+/*  ============================================================
+    テーブル
+    ============================================================
+*/
+
+.markdown table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0; /* 前後の余白を広めにとって独立させる */
+    font-size: var(--text-caption);
+}
+
+/* ヘッダー：背景色をなくし、下線を少し太くして領域を分ける */
+.markdown th {
+    font-family: var(--font-sans);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--text-label);
+    text-align: left;
+    color: var(--color-text-base);
+    padding: 0.75rem 1rem;
+    /* ヘッダーとデータを分ける線 */
+    border-bottom: 1px solid var(--color-border-strong);
+    background: transparent;
+}
+
+/* セル：縦線を消し、薄い横線のみにする */
+.markdown td {
+    font-family: var(--font-serif);
+    color: var(--color-text-base);
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--color-border-base);
+    line-height: 1.7;
+    background: transparent;
+}
+
+/* 一番下の行はボーダーを消してスッキリ終わらせる */
+.markdown tr:last-child td {
+    border-bottom: none;
+}
+
+/* ホバーエフェクト */
+.markdown tr:hover td {
+    background-color: var(--color-hover-subtle);
+}
+
+/*
+    ============================================================
+    引用
+    本文はMarkdownViewer側で p タグを div に置換しているため、
+    p ではなく > div を指定してスタイルを当てる
+    ============================================================
+*/
+
+/* 引用ブロック(GitHub Alert以外) */
+.markdown blockquote:not(.markdown-alert) {
+    border-left: 2px solid var(--color-accent);
+    margin: 1rem 0;
+    padding: 1rem 1.25rem;
+    background: var(--color-accent-bg);
+    border-radius: 0 2px 2px 0;
+}
+
+/* テキスト */
+.markdown blockquote:not(.markdown-alert) > div {
+    font-family: var(--font-serif);
+    font-size: var(--text-body-sm);
+    color: var(--color-text-base);
+}
+
+/*
+    ============================================================
+    GitHub Alerts (remark-github-blockquote-alert)
+    ============================================================
+*/
+
+.markdown .markdown-alert {
+    margin: 1.5rem 0;
+    padding: 1rem 1.25rem;
+    border-left: 4px solid;
+    border-radius: 0 4px 4px 0; /* 左側のボーダーを際立たせるため右側のみ角丸 */
+}
+
+/* タイトル部分 */
+.markdown .markdown-alert-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-sans);
+    font-size: var(--text-caption);
+    font-weight: var(--font-weight-heading);
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+/* タイトル横のアイコン */
+.markdown .markdown-alert-title svg {
+    width: 1.1em;
+    height: 1.1em;
+    fill: currentColor;
+}
+
+/* アラート内のテキスト（タイトルとは区別） */
+.markdown .markdown-alert p:not(.markdown-alert-title) {
+    font-size: var(--text-body-sm);
+    color: var(--color-text-base);
+    margin-bottom: 0; /* 最後の段落の余白を消す */
+}
+
+/* アラート内のテキスト (pタグがdivに置き換わっているため div で指定) */
+.markdown .markdown-alert > div:not(.markdown-alert-title) {
+    font-size: var(--text-body-sm);
+    color: var(--color-text-base);
+}
+
+/* アラート内で一番最後の段落の margin-bottom を消し、外枠のpaddingと揃える */
+.markdown .markdown-alert > div:last-child {
+    margin-bottom: 0;
+}
+
+/* 最後の段落の mb-4 を打ち消して、上下のパディングを均等にする */
+.markdown blockquote:not(.markdown-alert) > div:last-child {
+    margin-bottom: 0;
+}
+
+/* --- NOTE (ノート) --- */
+.markdown .markdown-alert-note {
+    border-color: var(--color-accent);
+    background-color: var(--color-accent-bg);
+}
+.markdown .markdown-alert-note .markdown-alert-title {
+    color: var(--color-accent);
+}
+
+/* --- WARNING (警告) --- */
+.markdown .markdown-alert-warning {
+    border-color: var(--color-signal-warning);
+    background-color: var(--color-signal-warning-bg);
+}
+.markdown .markdown-alert-warning .markdown-alert-title {
+    color: var(--color-signal-warning);
+}
+
+/* --- IMPORTANT (重要) --- */
+.markdown .markdown-alert-important {
+    border-color: var(--color-signal-error);
+    background-color: var(--color-signal-error-bg);
+}
+.markdown .markdown-alert-important .markdown-alert-title {
+    color: var(--color-signal-error);
+}

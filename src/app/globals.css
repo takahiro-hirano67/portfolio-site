@@ -2,9 +2,10 @@
 
 /* Verideaで採用しているデザイントークンをベースとしている */
 
+/* 例: --color-<name> の形式で書くと、Tailwindのカラーとして登録される */
 @theme {
     /* --- 背景・サーフェス --- */
-    --color-bg-base: #f7f6f3; /* 全体の基底背景 (ウォームグレー) */
+    --color-bg-base: #f7f6f3; /* アプリ全体の基底背景 (ウォームグレー) */
     --color-bg-subtle: #efefed; /* 控えめな背景 (サイドバーや薄いバッジ) */
     --color-tag: #e8e7e4; /* タグ・バッジ・ホバー背景 */
     --color-surface: #ffffff; /* サーフェス (カードや読む領域は純白) */
@@ -24,6 +25,21 @@
     --color-accent: #3d52a0; /* インタラクション・強調 (インディゴ) */
     --color-accent-hover: #2f407d; /* アクセントのホバー時 (少し暗く) */
     --color-accent-bg: #eef0f8; /* アクセントカラーの背景版 (アクティブ状態など) */
+
+    /* --- シグナル（状態）カラー --- */
+    /* エラー・重要 (MarkdownのImportant / 破壊的操作) : くすんだローズレッド */
+    --color-signal-error: #8c5a6d;
+    --color-signal-error-bg: #fbf5f7;
+    /* 成功 (コピー完了など) : セージグリーン */
+    --color-signal-success: #427a5b;
+    --color-signal-success-bg: #eef5f1;
+    /* 警告・推測タグ (MarkdownのWarning) : 黄土色 */
+    --color-signal-warning: #9a6b2a;
+    --color-signal-warning-bg: #fef3e2;
+
+    /* --- Markdown 特有カラー --- */
+    --color-md-code: #8c2d47; /* インラインコードのテキスト (深紅) */
+    --color-hover-subtle: rgba(0, 0, 0, 0.015); /* テーブルホバーエフェクト (極めて薄いグレーを敷く) */
 
     /* --- フォント --- */
     --font-sans: var(--font-noto-sans-jp); /* ゴシック体フォント (UI要素・操作する領域) */

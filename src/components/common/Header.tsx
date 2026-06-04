@@ -1,3 +1,5 @@
+// src/components/Header.tsx
+
 import Link from "next/link";
 import type { HeaderData } from "@/types";
 
@@ -14,7 +16,7 @@ export default function Header({ data }: HeaderProps) {
             <div className="mx-auto flex h-14 w-full max-w-4xl items-center justify-between">
                 {/* 左側： 名前 */}
                 <Link
-                    href="/"
+                    href="/portfolio"
                     className="font-medium font-serif text-caption text-text-base tracking-wide transition-colors hover:text-accent"
                 >
                     {data.title}
@@ -23,13 +25,13 @@ export default function Header({ data }: HeaderProps) {
                 {/* 右側: ナビゲーション */}
                 <nav className="flex items-center gap-4 min-[480px]:gap-6">
                     {data.navLinks.map((link) => (
-                        <a
-                            key={link}
-                            href={`#${link.toLowerCase()}`}
+                        <Link
+                            key={link.label}
+                            href={link.url}
                             className="hidden text-text-mid text-tiny transition-colors hover:text-accent min-[480px]:block"
                         >
-                            {link}
-                        </a>
+                            {link.label}
+                        </Link>
                     ))}
                     {/* 外部リンク */}
                     <div className="flex items-center gap-2">

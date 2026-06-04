@@ -1,4 +1,4 @@
-import { PortfolioRepoLink } from "@/data";
+import { PortfolioRepoLink } from "@/data/common-data";
 
 /**
  * フッター コンポーネント
