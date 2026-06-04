@@ -4,6 +4,8 @@ import type { ArticleData } from "@/types";
 // 記事
 // ============================================================
 
+// slug: 拡張子を除いたファイル名を指定
+
 export const ARTICLES: ArticleData[] = [
     {
         slug: "self-pr",
