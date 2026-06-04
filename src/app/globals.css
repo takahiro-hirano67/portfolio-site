@@ -68,8 +68,8 @@
 html {
     /* スムーススクロール */
     scroll-behavior: smooth;
-    /* ヘッダーが固定（fixed）されているため、スクロールの停止位置をヘッダーの高さ分（56px）ずらす */
-    scroll-padding-top: 56px;
+    /* ヘッダーが固定（fixed）されているため、スクロールの停止位置を下にずらす */
+    scroll-padding-top: 100px;
 }
 
 body {
