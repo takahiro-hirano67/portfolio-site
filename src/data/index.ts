@@ -1,4 +1,4 @@
-import type { HeaderData, ProfileData, ResearchData, SkillGroup, WorkData } from "@/types";
+import type { ArticleData, HeaderData, ProfileData, ResearchData, SkillGroup, WorkData } from "@/types";
 
 // ============================================================
 // リンク
@@ -7,6 +7,21 @@ import type { HeaderData, ProfileData, ResearchData, SkillGroup, WorkData } from
 export const GitHubLink = "https://github.com/takahiro-hirano67";
 export const QiitaLink = "https://qiita.com/takahiro-hirano67";
 export const PortfolioRepoLink = "https://github.com/takahiro-hirano67/portfolio-site";
+
+// ============================================================
+// 記事
+// ============================================================
+
+export const ARTICLES: ArticleData[] = [
+    {
+        slug: "self-pr",
+        title: "「何を根拠にそう言えるのか」を問い続ける",
+        date: "2026-06-04",
+        description:
+            "ハルシネーションとの格闘からVerideaの開発思想に至るまでの軌跡と、エンジニアとしての価値観について。",
+    },
+    // 今後 Markdownファイルを追加するたびにここに追記していく
+];
 
 // ============================================================
 // ヘッダー
