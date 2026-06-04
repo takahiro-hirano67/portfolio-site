@@ -52,22 +52,24 @@ export default function Works({ works }: WorksProps) {
                                 }}
                             >
                                 {/* カードヘッダー */}
-                                <div className="mb-4 flex items-start justify-between gap-4">
-                                    <div>
-                                        <div className="mb-1 flex items-center gap-2">
+                                <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                                    {/* タイトルエリア */}
+                                    <div className="min-w-0 flex-1">
+                                        <div className="mb-1 flex flex-wrap items-center gap-2">
                                             <h3 className="font-medium text-body text-text-base">{work.name}</h3>
+
                                             {work.badge && (
                                                 <span className="rounded-sm bg-accent-bg px-2 py-0.5 font-medium text-accent text-tiny">
                                                     {work.badge}
                                                 </span>
                                             )}
                                         </div>
+
                                         <p className="text-caption text-text-mid">{work.tagline}</p>
                                     </div>
 
                                     {/* アクション */}
-                                    <div className="flex shrink-0 items-center gap-2">
-                                        {/* リンク配列を展開してボタンを生成 */}
+                                    <div className="flex flex-wrap items-center gap-2 sm:justify-end">
                                         {work.links?.map((link) => (
                                             <a
                                                 key={link.id}
@@ -80,7 +82,6 @@ export default function Works({ works }: WorksProps) {
                                             </a>
                                         ))}
 
-                                        {/* 画像トグルボタン */}
                                         {work.images && work.images.length > 0 && (
                                             <button
                                                 type="button"
