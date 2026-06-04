@@ -16,6 +16,7 @@ export type ExternalLink = {
 export type ArticleData = {
     slug: string; // URLとファイル名に使用 (例: "self-pr")
     title: string; // 記事のタイトル
+    tags?: string[]; // タグ
     date: string; // 投稿日
     description: string; // 一覧に表示する概要
 };
@@ -23,9 +24,15 @@ export type ArticleData = {
 // ============================================================
 // ヘッダー
 // ============================================================
+
+export type NavLink = {
+    label: string; // 表示するテキスト (例: "About", "Articles")
+    url: string; // 遷移先のパス (例: "/#about", "/articles")
+};
+
 export type HeaderData = {
     title: string; // 左上に表示するサイト名や名前
-    navLinks: string[]; // ページ内遷移用のナビゲーションリンク名 (例: "About")
+    navLinks: NavLink[]; // ページ内遷移用のナビゲーションリンク名 (例: "About")
     sns: ExternalLink[]; // ヘッダー右側に表示するSNSや外部リンクのリスト
 };
 
