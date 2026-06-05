@@ -81,9 +81,9 @@ export default function Research({ researchList }: ResearchProps) {
                                 )}
                             </div>
 
-                            {/* 概要 */}
+                            {/* 説明 */}
                             {research.description && (
-                                <p className="mb-6 text-caption text-text-mid leading-relaxed">
+                                <p className="mb-6 whitespace-pre-line text-caption text-text-mid leading-relaxed">
                                     {research.description}
                                 </p>
                             )}

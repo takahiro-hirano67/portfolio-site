@@ -33,7 +33,15 @@
         "useGitignore": true,
         "useDotIgnore": true,
         "useDefaultPatterns": true,
-        "customPatterns": ["**.svg", "**.png", "**.jpg", "repomix.config.json"]
+        "customPatterns": [
+            "repomix.config.json",
+            "biome.json",
+            "postcss.config.mjs",
+            "tsconfig.json",
+            "public/articles",
+            "public/research",
+            "public/works"
+        ]
     },
     "security": {
         "enableSecurityCheck": true

@@ -105,7 +105,9 @@ export default function Works({ works }: WorksProps) {
                                 </div>
 
                                 {/* 説明 */}
-                                <p className="mb-4 text-caption text-text-mid leading-relaxed">{work.description}</p>
+                                <p className="mb-4 whitespace-pre-line text-caption text-text-mid leading-relaxed">
+                                    {work.description}
+                                </p>
 
                                 {/* スタック */}
                                 <div className="flex flex-wrap gap-1.5">
