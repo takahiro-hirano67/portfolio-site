@@ -1,6 +1,6 @@
 import FadeIn from "@/components/common/FadeIn";
+import Articles from "@/components/portfolio/Articles";
 import Hero from "@/components/portfolio/Hero";
-import RecentArticles from "@/components/portfolio/RecentArticles";
 import Research from "@/components/portfolio/Research";
 import Skills from "@/components/portfolio/Skills";
 import Works from "@/components/portfolio/Works";
@@ -26,7 +26,7 @@ export default function Portfolio() {
             </FadeIn>
 
             <FadeIn>
-                <RecentArticles />
+                <Articles />
             </FadeIn>
         </div>
     );
