@@ -127,7 +127,6 @@
     ============================================================
 */
 
-
 .markdown hr {
     border: none;
     border-top: 1px solid var(--color-border-base);
@@ -347,14 +346,14 @@
     /* ブラウザ標準の見た目と disabled 特有のグレーアウトを解除 */
     appearance: none;
     -webkit-appearance: none;
-    opacity: 1; 
+    opacity: 1;
 
     /* サイズと位置の調整 */
     flex-shrink: 0;
     width: 1.1em;
     height: 1.1em;
     margin-top: 0.35em; /* テキストの高さに合わせる */
-    
+
     /* 未チェック状態のデザイン */
     border: 1.5px solid var(--color-border-strong);
     border-radius: 3px;
