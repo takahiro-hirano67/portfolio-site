@@ -17,6 +17,7 @@ import MarkdownImage from "./renderers/MarkdownImage";
 import MarkdownLink from "./renderers/MarkdownLink";
 import MarkdownParagraph from "./renderers/MarkdownParagraph";
 import MarkdownPre from "./renderers/MarkdownPre";
+import MarkdownTable from "./renderers/MarkdownTable";
 
 interface MarkdownViewerProps {
     content: string;
@@ -47,6 +48,7 @@ const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content, className, cus
                     code: CodeBlock,
                     img: MarkdownImage,
                     a: MarkdownLink,
+                    table: MarkdownTable,
                     // 外部からのカスタムコンポーネントで上書き・追加
                     ...customComponents,
                 }}
