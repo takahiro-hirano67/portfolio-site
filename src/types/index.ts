@@ -15,6 +15,7 @@ export type ExternalLink = {
 
 export type ArticleData = {
     id: string; // 記事の一意なID
+    order: number; // 並び順
     slug: string; // URLとファイル名に使用 (拡張子以外を指定)
     title: string; // 記事のタイトル
     tags?: string[]; // タグ
