@@ -9,7 +9,7 @@ interface MarkdownParagraphProps extends ComponentPropsWithoutRef<"div"> {
  */
 const MarkdownParagraph = ({ node, className, children, ...props }: MarkdownParagraphProps) => {
     return (
-        <div className={`mb-4 leading-relaxed ${className || ""}`} {...props}>
+        <div className={`markdown-paragraph ${className || ""}`} {...props}>
             {children}
         </div>
     );

@@ -14,7 +14,6 @@ const MarkdownLink = ({ node, ...props }: MarkdownLinkProps) => {
             {...props}
             target="_blank"
             rel="noopener noreferrer"
-            className="cursor-pointer text-blue-600 hover:underline"
         />
     );
 };
