@@ -40,7 +40,8 @@
             "tsconfig.json",
             "public/articles",
             "public/research",
-            "public/works"
+            "public/works",
+            "src/data"
         ]
     },
     "security": {
