@@ -89,9 +89,11 @@
 
 /* --- @theme 外に通常のCSSとして記述 --- */
 
-html {
+html[data-scroll-behavior="smooth"] {
     /* スムーススクロール */
     scroll-behavior: smooth;
+}
+html {
     /* ヘッダーが固定（fixed）されているため、スクロールの停止位置を下にずらす */
     scroll-padding-top: 100px;
 }
