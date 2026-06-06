@@ -14,7 +14,9 @@ export type ExternalLink = {
 // ============================================================
 
 export type ArticleData = {
-    slug: string; // URLとファイル名に使用 (例: "self-pr")
+    id: string; // 記事の一意なID
+    order: number; // 並び順
+    slug: string; // URLとファイル名に使用 (拡張子以外を指定)
     title: string; // 記事のタイトル
     tags?: string[]; // タグ
     date: string; // 投稿日

@@ -22,7 +22,7 @@ interface MermaidProps {
 }
 
 /**
- * Mermaidをレンダリングするコンポーネント
+ * Mermaidレンダリング用コンポーネント
  *
  * @param code - Mermaidが指定されたコードブロック
  */

@@ -4,29 +4,25 @@
 
 フリーヒルズラボでの開発・検証の過程で経験した、LLMが統計的に陥りやすいパターン(過度な補完、形式的な完成度の追求、等)に対して、具体的な対処を記述しています。
 
-定期的に見直していますが、半年近くは大きな変更を加えていないので、安定して運用できているなと認識しています。
+定期的に見直していますが、半年近く大きな変更を加えていないので、多様な入力が想定される状況においても安定して運用できていると認識しています。
 
-## Claudeとの親和性
+## Claude との親和性
 
-作成当時は意識していませんでしたが、特に Claude との親和性が高いということに気づきました。
+作成当時は意識していませんでしたが、利用していくうちに Claude との相性が良いという点に気がつきました。
 
-Anthropc社が掲げる **Be helpful, honest, and harmless.(親切、誠実、無害)** という考え方や **Soul Document(魂の文書)** 、そして **Constitutional AI（憲法AI）** といった試みが、以下のプロンプトとも相性がいいように思います。
+後付けの理由にはなりますが、Anthropic 社が掲げる **Be helpful, honest, and harmless. (親切、誠実、無害)** という考え方や **Soul Document (魂の文書)** 、そして **Constitutional AI （憲法AI）** といった試みが、以下のプロンプトと親和性があるためではないかと考えています。
 
 ### 参考リンク
 
-【Anthropc】
-
-- [Making AI systems you can rely on](https://www.anthropic.com/company)
-
-【Soul Document】
-
+- [Anthropic Company](https://www.anthropic.com/company)
 - [Claude 4.5 Opus' Soul Document](https://www.lesswrong.com/posts/vpNG99GhbBoLov9og/claude-4-5-opus-soul-document)
 - [opus_4_5_soul_document_cleaned_up.md](https://gist.github.com/Richard-Weiss/efe157692991535403bd7e7fb20b6695)
-
-【Constitutional AI】
-
 - [Claude's new constitution](https://www.anthropic.com/news/claude-new-constitution)
 - [Claude’s Constitution](https://www.anthropic.com/constitution)
+
+---
+
+以下にシステムプロンプトを記述します。
 
 # System Prompt: 透明性と誠実性を重視した情報処理AI
 

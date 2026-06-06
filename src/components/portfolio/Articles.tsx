@@ -2,31 +2,30 @@ import Link from "next/link";
 import { ARTICLES } from "@/data/articles-data";
 
 /**
- * トップページ用の最新記事ピックアップセクション
+ * トップページ用の記事セクション（標準順の上位3件を表示）
  */
-export default function RecentArticles() {
-    // 記事を日付の降順（新しい順）にソートし、最新の3件のみを抽出
-    const recentArticles = [...ARTICLES]
-        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-        .slice(0, 3);
+export default function Articles() {
+    // 記事を昇順(標準順)にソートし、上位3件のみを抽出
+    const displayArticles = [...ARTICLES].sort((a, b) => Number(a.order) - Number(b.order)).slice(0, 3);
 
-    if (recentArticles.length === 0) return null;
+    if (displayArticles.length === 0) return null;
 
     return (
         <section id="articles">
             {/* セクションヘッダー */}
             <div className="mb-12 border-border-base border-b pb-4">
-                <h2 className="font-heading font-serif text-text-base text-title">最近の記事</h2>
+                <h2 className="font-heading font-serif text-text-base text-title">記事</h2>
             </div>
 
             {/* 記事リスト（コンパクト版） */}
             <div className="flex flex-col gap-6">
-                {recentArticles.map((article) => (
+                {displayArticles.map((article) => (
                     <Link
                         key={article.slug}
                         href={`/articles/${article.slug}`}
                         className="group flex flex-col gap-2 rounded-sm border border-border-light bg-surface px-6 py-5 transition-colors hover:border-accent/30"
                     >
+                        {/* 日付とタグ */}
                         <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
                             <time className="text-text-soft text-tiny tracking-wider">{article.date}</time>
                             {article.tags && article.tags.length > 0 && (
@@ -42,9 +41,18 @@ export default function RecentArticles() {
                                 </div>
                             )}
                         </div>
+
+                        {/* タイトル */}
                         <h3 className="font-medium font-serif text-body text-text-base transition-colors group-hover:text-accent">
                             {article.title}
                         </h3>
+
+                        {/* 概要 (サイズ感を保つため、文字サイズを少し落として最大2行に制限) */}
+                        {article.description && (
+                            <p className="line-clamp-2 text-caption text-text-mid leading-relaxed">
+                                {article.description}
+                            </p>
+                        )}
                     </Link>
                 ))}
             </div>

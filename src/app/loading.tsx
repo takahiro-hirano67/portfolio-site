@@ -3,7 +3,7 @@
  */
 export default function Loading() {
     return (
-        <div className="flex min-h-dvh flex-col items-center justify-center bg-bg-base px-6">
+        <div className="mt-36 flex flex-col items-center justify-center bg-bg-base px-6">
             <div className="flex flex-col items-center gap-6">
                 {/* シンプルなスピンアニメーション */}
                 <div className="h-8 w-8 animate-spin rounded-full border-2 border-border-base border-t-accent" />

@@ -5,7 +5,7 @@ import Link from "next/link";
  */
 export default function NotFound() {
     return (
-        <div className="flex min-h-dvh flex-col items-center justify-center bg-bg-base px-6 text-center">
+        <div className="mt-36 flex flex-col items-center justify-center bg-bg-base px-6 text-center">
             {/* 404 タイトル */}
             <h1 className="mb-2 font-semibold font-serif text-6xl text-text-base">404</h1>
 
