@@ -8,19 +8,51 @@ import type { ArticleData } from "@/types";
 
 export const ARTICLES: ArticleData[] = [
     {
-        slug: "self-pr",
-        title: "「何を根拠にそう言えるのか」を問い続ける",
+        id: "1",
+        order: 1,
+        slug: "engineer-values",
+        title: "エンジニアとしての価値観",
         date: "2026-06-04",
-        tags: ["自己PR"],
-        description:
-            "ハルシネーションとの格闘からVerideaの開発思想に至るまでの軌跡と、エンジニアとしての価値観について。",
+        tags: ["自己PR", "エンジニア像", "生成AI"],
+        description: "研究と開発を往復する中で辿り着いた、根拠と実装に対する考え方についてまとめています。",
     },
     {
+        id: "2",
+        order: 2,
+        slug: "engineer-origins",
+        title: "初心を振り返る",
+        date: "2026-06-06",
+        tags: ["エンジニア像", "振り返り"],
+        description:
+            "プログラミングを始めた頃の原体験から、開発していて楽しいと感じる瞬間や夢中になれる瞬間について振り返っています。",
+    },
+    {
+        id: "3",
+        order: 3,
+        slug: "thoughts-behind-the-hallucination-research",
+        title: "研究に込めた思い",
+        date: "2026-06-05",
+        tags: ["研究", "生成AI", "ハルシネーション"],
+        description:
+            "ハルシネーションの定量評価という研究の出発点となった問題意識と、それに対する自分なりの回答や考察をまとめています。",
+    },
+    {
+        id: "4",
+        order: 4,
+        slug: "activities-at-freehillslab",
+        title: "株式会社フリーヒルズラボでの取り組み",
+        date: "2026-06-07",
+        tags: ["実務経験", "スタートアップ", "エンジニアの責任"],
+        description: "役員を務める大学発スタートアップでの事業内容と、顧客ニーズの探求、そして開発において貫いている思想についてまとめています。",
+    },
+    {
+        id: "5",
+        order: 5,
         slug: "system-prompt",
         title: "透明性と誠実性を重視した情報処理AI",
         date: "2026-06-04",
-        tags: ["システムプロンプト", "Claude"],
+        tags: ["システムプロンプト", "生成AI", "ハルシネーション", "Claude"],
         description:
-            "半年近く継続して運用しているシステムプロンプトです。フリーヒルズラボでの開発中に直面した、ハルシネーションとの格闘の中で積み重ねられた知見が込められています。",
+            "開発中に直面したハルシネーションとの格闘から得た知見を反映し、半年近く継続して運用しているシステムプロンプトを紹介しています。",
     },
 ];
