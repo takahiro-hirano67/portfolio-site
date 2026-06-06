@@ -1,12 +1,6 @@
 /*
     ============================================================
     Markdownのスタイルを適用するCSS
-
-    デザイン方針:
-    - フォント: Noto Serif JP (読む領域) を基本とする
-    - カラー: globals.css のデザイントークン (CSS変数) を参照
-    - 余白: 広めに取り、文字を読む行為を邪魔しない
-    - コードブロック: bg-base をベースに、surface との差で浮かせる
     ============================================================
 */
 
@@ -33,7 +27,7 @@
     font-family: var(--font-serif);
     font-size: var(--text-display);
     font-weight: var(--font-weight-heading);
-    margin: 1rem 0 0.75rem;
+    margin: 1rem 0.75rem 1.75rem 0rem;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid var(--color-border-light);
 }
@@ -42,14 +36,14 @@
     font-family: var(--font-serif);
     font-size: var(--text-heading);
     font-weight: var(--font-weight-heading);
-    margin: 1.75rem 0 0.5rem;
+    margin: 2.5rem 0 1.25rem;
 }
 
 .markdown h3 {
     font-family: var(--font-serif);
     font-size: var(--text-subheading);
     font-weight: var(--font-weight-heading);
-    margin: 1.5rem 0 0.4rem;
+    margin: 2rem 0 0.85rem;
 }
 
 .markdown h4,
@@ -59,7 +53,7 @@
     font-size: var(--text-body);
     font-weight: var(--font-weight-heading);
     color: var(--color-text-base);
-    margin: 1.25rem 0 0.4rem;
+    margin: 1.75rem 0 0.5rem;
 }
 
 /*
@@ -68,17 +62,12 @@
     ============================================================
 */
 
-.markdown p {
+/* コンポーネント側で付与したクラス名で指定（pタグの代わり） */
+.markdown .markdown-paragraph {
     font-family: var(--font-serif);
     font-size: var(--text-body);
     line-height: 1.85;
-    margin-bottom: 1rem;
-}
-
-.markdown hr {
-    border: none;
-    border-top: 1px solid var(--color-border-base);
-    margin: 1.5rem 0;
+    margin-bottom: 1.25rem;
 }
 
 /*
@@ -105,7 +94,8 @@
 .markdown ul,
 .markdown ol {
     padding-left: 1.5rem;
-    margin: 0.5rem 0 1rem;
+    /* リスト全体の上下余白を拡大し、前後の段落から独立させる */
+    margin: 1rem 0 1.5rem;
 }
 
 .markdown li {
@@ -113,7 +103,8 @@
     font-size: var(--text-body);
     line-height: 1.85;
     padding-left: 0.25rem;
-    margin-bottom: 0.4rem;
+    /* 項目同士の間隔を少し広げて可読性を向上 */
+    margin-bottom: 0.75rem;
     list-style-position: outside;
 }
 
@@ -125,8 +116,8 @@
     list-style-type: decimal;
 }
 
-.markdown ul li p,
-.markdown ol li p {
+.markdown ul li .markdown-paragraph,
+.markdown ol li .markdown-paragraph {
     margin: 0.4rem 0;
 }
 
@@ -136,12 +127,14 @@
     ============================================================
 */
 
+
 .markdown hr {
-    margin: 0.75rem 0.4rem;
+    border: none;
+    border-top: 1px solid var(--color-border-base);
+    margin: 2rem 0;
 }
 
-/* 
-    ============================================================
+/* ============================================================
     リンク
     ============================================================
 */
@@ -178,7 +171,8 @@
     word-break: break-all;
 }
 
-/*  ============================================================
+/*
+    ============================================================
     テーブル
     ============================================================
 */
@@ -186,7 +180,6 @@
 .markdown table {
     width: 100%;
     border-collapse: collapse;
-    margin: 2rem 0; /* 前後の余白を広めにとって独立させる */
     font-size: var(--text-caption);
 }
 
@@ -198,9 +191,9 @@
     text-align: left;
     color: var(--color-text-base);
     padding: 0.75rem 1rem;
-    /* ヘッダーとデータを分ける線 */
     border-bottom: 1px solid var(--color-border-strong);
     background: transparent;
+    white-space: nowrap;
 }
 
 /* セル：縦線を消し、薄い横線のみにする */
@@ -211,6 +204,7 @@
     border-bottom: 1px solid var(--color-border-base);
     line-height: 1.7;
     background: transparent;
+    white-space: nowrap;
 }
 
 /* 一番下の行はボーダーを消してスッキリ終わらせる */
@@ -234,7 +228,7 @@
 /* 引用ブロック(GitHub Alert以外) */
 .markdown blockquote:not(.markdown-alert) {
     border-left: 2px solid var(--color-accent);
-    margin: 1rem 0;
+    margin: 1.5rem 0;
     padding: 1rem 1.25rem;
     background: var(--color-accent-bg);
     border-radius: 0 2px 2px 0;
@@ -280,7 +274,7 @@
 }
 
 /* アラート内のテキスト（タイトルとは区別） */
-.markdown .markdown-alert p:not(.markdown-alert-title) {
+.markdown .markdown-alert .markdown-paragraph:not(.markdown-alert-title) {
     font-size: var(--text-body-sm);
     color: var(--color-text-base);
     margin-bottom: 0; /* 最後の段落の余白を消す */
@@ -327,4 +321,53 @@
 }
 .markdown .markdown-alert-important .markdown-alert-title {
     color: var(--color-signal-error);
+}
+
+/*
+    ============================================================
+    タスクリスト (GFM)
+    ============================================================
+*/
+
+/* タスクリスト全体 */
+.markdown .contains-task-list {
+    padding-left: 0;
+}
+
+/* タスクリストの <li> から黒丸を消し、フレックスボックスで並べる */
+.markdown li.task-list-item {
+    list-style-type: none;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem; /* チェックボックスとテキストの隙間 */
+}
+
+/* カスタムチェックボックスの描画 */
+.markdown li.task-list-item input[type="checkbox"] {
+    /* ブラウザ標準の見た目と disabled 特有のグレーアウトを解除 */
+    appearance: none;
+    -webkit-appearance: none;
+    opacity: 1; 
+
+    /* サイズと位置の調整 */
+    flex-shrink: 0;
+    width: 1.1em;
+    height: 1.1em;
+    margin-top: 0.35em; /* テキストの高さに合わせる */
+    
+    /* 未チェック状態のデザイン */
+    border: 1.5px solid var(--color-border-strong);
+    border-radius: 3px;
+    background-color: var(--color-surface);
+}
+
+/* チェックされた状態のデザイン */
+.markdown li.task-list-item input[type="checkbox"]:checked {
+    background-color: var(--color-signal-success);
+    border-color: var(--color-signal-success);
+    /* 白いチェックマークのSVGを背景画像として表示 */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3E%3Cpath fill-rule='evenodd' d='M12.207 5.293a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.793l4.293-4.293a1 1 0 011.414 0z' clip-rule='evenodd'/%3E%3C/svg%3E");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
 }
