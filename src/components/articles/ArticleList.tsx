@@ -20,6 +20,9 @@ export default function ArticleList({ articles }: ArticleListProps) {
             <header className="mb-10 border-border-base border-b pb-4">
                 <h1 className="font-heading font-serif text-display text-text-base tracking-wide">記事一覧</h1>
                 <p className="mt-4 text-caption text-text-mid">開発の裏側やシステム設計の思想、技術的な探求の記録。</p>
+                <p className="text-caption text-text-mid">
+                    技術ブログに投稿している記事とは異なり、より踏み込んだ内容を発信していきます。
+                </p>
             </header>
 
             {/* 記事リスト */}
