@@ -29,42 +29,41 @@ export const ARTICLES: ArticleData[] = [
     {
         id: "3",
         order: 3,
-        slug: "thoughts-behind-the-hallucination-research",
-        title: "研究に込めた思い",
-        date: "2026-06-05",
-        tags: ["研究", "生成AI", "ハルシネーション"],
-        description:
-            "ハルシネーションの定量評価という研究の出発点となった問題意識と、それに対する自分なりの回答や考察をまとめています。",
-    },
-    {
-        id: "4",
-        order: 4,
         slug: "freehills-lab-overview",
         title: "フリーヒルズラボでの取り組み",
         date: "2026-06-08",
         tags: ["フリーヒルズラボ"],
         description:
-        "フリーヒルズラボでどのような役割を担い、どのような思いで開発に向き合っているのか、その全体像についてまとめています。",
+            "フリーヒルズラボでどのような役割を担い、どのような思いで開発に向き合っているのか、その全体像についてまとめています。",
     },
     {
-        id: "5",
-        order: 5,
+        id: "4",
+        order: 4,
         slug: "reality-of-tech-matching",
         title: "内容の正確さが価値を生まない現実",
         date: "2026-06-07",
         tags: ["フリーヒルズラボ", "企業の声", "協業先マッチング"],
-        description:
-            "企業との打ち合わせで直面した「技術的な正確さがビジネス価値を生まない」という課題について振り返っています。",
+        description: "企業との打ち合わせで実感した、開発と現場における温度感の差ついて振り返っています。",
     },
     {
-        id: "6",
-        order: 6,
+        id: "5",
+        order: 5,
         slug: "rebuilding-patent-database",
         title: "特許データベースの再構築",
         date: "2026-06-07",
         tags: ["フリーヒルズラボ", "データベース", "リファクタリング"],
         description:
             "数百万件規模の特許公報データを実用レベルで捌くために、どのような課題感からデータベースを一から再構築し、どのようなアプローチをとったのかを記録しています。",
+    },
+    {
+        id: "6",
+        order: 6,
+        slug: "thoughts-behind-the-hallucination-research",
+        title: "研究に込めた思い",
+        date: "2026-06-05",
+        tags: ["研究", "生成AI", "ハルシネーション"],
+        description:
+            "ハルシネーションの定量評価という研究の出発点となった問題意識と、それに対する自分なりの回答や考察をまとめています。",
     },
     {
         id: "7",
