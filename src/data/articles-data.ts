@@ -19,12 +19,12 @@ export const ARTICLES: ArticleData[] = [
     {
         id: "2",
         order: 2,
-        slug: "engineer-origins",
-        title: "初心を振り返る",
-        date: "2026-06-06",
-        tags: ["エンジニア像", "振り返り"],
+        slug: "thoughts-behind-the-hallucination-research",
+        title: "研究に込めた思い",
+        date: "2026-06-05",
+        tags: ["研究", "生成AI", "ハルシネーション"],
         description:
-            "プログラミングを始めた頃の原体験から、開発していて楽しいと感じる瞬間や夢中になれる瞬間について振り返っています。",
+            "ハルシネーションの定量評価という研究の出発点となった問題意識と、それに対する自分なりの回答や考察をまとめています。",
     },
     {
         id: "3",
@@ -58,12 +58,12 @@ export const ARTICLES: ArticleData[] = [
     {
         id: "6",
         order: 6,
-        slug: "thoughts-behind-the-hallucination-research",
-        title: "研究に込めた思い",
-        date: "2026-06-05",
-        tags: ["研究", "生成AI", "ハルシネーション"],
+        slug: "engineer-origins",
+        title: "初心を振り返る",
+        date: "2026-06-06",
+        tags: ["エンジニア像", "振り返り"],
         description:
-            "ハルシネーションの定量評価という研究の出発点となった問題意識と、それに対する自分なりの回答や考察をまとめています。",
+            "プログラミングを始めた頃の原体験から、開発していて楽しいと感じる瞬間や夢中になれる瞬間について振り返っています。",
     },
     {
         id: "7",
